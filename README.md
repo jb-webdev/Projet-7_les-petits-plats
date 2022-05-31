@@ -1,7 +1,7 @@
 # Formation développeur d'application - Javascript React
 
 ## Développez un algorithme de recherche en JavaScript
-_Projet 6 - FishEye - Juin 2022_
+_Projet 7 - les petits plats - Juin 2022_
 ![Screenshot](./asset/Screenshot-petits-plats_readme.png)
 
 ## Mission 
