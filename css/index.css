@@ -1,0 +1,54 @@
+:root{
+    --bg-primary: #e7e7e7;
+    --bg-secondary: #c7bebe;
+
+    --color-Blue: #3282f7;
+    --color-green: #68d9a4;
+    --color-red: #ed6454;
+}
+
+
+
+.gris-one {
+    background-color: var(--bg-secondary) !important;
+}
+.gris-two {
+    background-color: var(--bg-primary) !important;
+}
+
+
+.bgColorBlue{
+    background-color: var(--color-Blue) !important; 
+}
+.bgColorGreen{
+    background-color: var(--color-green) !important; 
+}
+.bgColorRed{
+    background-color: var(--color-red) !important; 
+}
+
+
+.colorWhite{
+    color: #ffffff !important;
+}
+.bgColorWhite{
+    background-color: #ffffff !important;  
+}
+
+
+
+/* HEADER */
+.HeaderStyle {
+    background-color: #ffffff;
+}
+
+/* FORMULAIRE DE RECHERCHE */
+.box-research{
+    padding: 0 !important;
+}
+
+.jumbotron{
+    border-radius: 0 !important;
+}
+
+
