@@ -1,0 +1,59 @@
+/* WRAPPER TAG */
+#wrapperTag{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+.tagSelect{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: 35px;
+    border-radius: 10px;
+    
+    margin-bottom: 10px;
+}
+.activeTag {
+    display: flex;
+}
+.closetag{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--bg-primary);
+    border: 1px solid var(--bg-primary);
+    width: 18px;
+    height: 18px;
+    font-size: 16px;
+    border-radius: 50%;
+    margin-left: 10px;
+    margin-right: 10px;
+    
+}
+.fa-xmark{
+    cursor: pointer;
+}
+
+.textTag{
+    margin-right: 10px;
+    color: var(--bg-primary);
+}
+.tagSelect-ingredient,
+.tagSelect-appareil,
+.tagSelect-ustensil {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.tagSelect-ingredient {
+    background-color: var(--color-Blue);
+}
+.tagSelect-appareil {
+    background-color: var(--color-red);
+}
+.tagSelect-ustensil {
+    background-color: var(--color-green);
+}

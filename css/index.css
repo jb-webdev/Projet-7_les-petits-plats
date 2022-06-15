@@ -3,52 +3,60 @@
     --bg-secondary: #c7bebe;
 
     --color-Blue: #3282f7;
+    --color-Blue-hover: #1168eb;
     --color-green: #68d9a4;
+    --color-green-hover: #3abe80;
     --color-red: #ed6454;
+    --color-red-hover: #eb3b27;
+    --color-white: #ffffff
 }
 
-
-
-.gris-one {
-    background-color: var(--bg-secondary) !important;
-}
-.gris-two {
-    background-color: var(--bg-primary) !important;
+body{
+    background-color: var(--color-white);
+    margin: 0;
+    padding: 0;
 }
 
-
-.bgColorBlue{
-    background-color: var(--color-Blue) !important; 
-}
-.bgColorGreen{
-    background-color: var(--color-green) !important; 
-}
-.bgColorRed{
-    background-color: var(--color-red) !important; 
+header{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 1em;
 }
 
-
-.colorWhite{
-    color: #ffffff !important;
-}
-.bgColorWhite{
-    background-color: #ffffff !important;  
-}
-
-
-
-/* HEADER */
-.HeaderStyle {
-    background-color: #ffffff;
+main{
+display: flex;
+max-width: 75%;
+margin-left: auto;
+margin-right: auto;
+flex-direction: column;
+justify-content: center;
 }
 
-/* FORMULAIRE DE RECHERCHE */
-.box-research{
-    padding: 0 !important;
+.formReseach  {
+    width: 100%;
+    position: relative;
+    display: flex;
+  }
+#inputResearch {
+    width: 100%;
+    border: 3px solid var(--bg-secondary);
+    background: var(--bg-secondary);
+    border-right: none;
+    padding: 5px;
+    height: 20px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
 }
 
-.jumbotron{
-    border-radius: 0 !important;
+.btnFormResearch {
+    width: 40px;
+    height: 36px;
+    border: 1px solid var(--bg-secondary);
+    background: var(--bg-secondary);
+    text-align: center;
+    color: #eeeeee;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 20px;
 }
-
-

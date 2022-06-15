@@ -1,0 +1,71 @@
+.wrapperBtn {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.dropbtn {
+    color: var(--bg-primary);
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropdown-content {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+.dropdown-content p {
+    color: var(--bg-primary);
+    padding: 5px 8px;
+    margin: 0;
+}
+/* Change color of dropdown links on hover */
+.dropdown-content p:hover {
+    cursor: pointer;
+    color: black;
+    background-color: #f1f1f1
+}
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: flex;
+}
+/* Button ingredient */
+.dropbtnIngredient{
+    background-color: var(--color-Blue);
+}
+.dropdown-content-ingredient{
+    background-color: var(--color-Blue);
+}
+.dropdownIngredient:hover .dropbtnIngredient{
+    background-color: var(--color-Blue-hover);
+}
+/* Button Appareils */
+.dropbtnAppareils {
+    background-color: var(--color-red);
+}
+.dropdown-content-appareils{
+    background-color: var(--color-red);
+}
+.dropdownAppareils:hover .dropbtnAppareils{
+    background-color: var(--color-red-hover);
+}
+
+/* Button Ustensils */
+.dropbtnUstensils {
+    background-color: var(--color-green);
+}
+.dropdown-content-ustensils{
+    background-color: var(--color-green);
+}
+.dropdownUstensils:hover .dropbtnUstensils{
+    background-color: var(--color-green-hover);
+}
+
+
