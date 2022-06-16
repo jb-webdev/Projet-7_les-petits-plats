@@ -4,7 +4,6 @@ export class FilterTag {
         this.ingredientsArray = []
         this.appliancesArray = []
         this.ustensilsArray = []
-        this.selectTag = []
 	}
 
 	createIngredientsArray(){
@@ -120,7 +119,8 @@ export class FilterTag {
         
     }
     /** methode pour afficher les tag ou les suprimer de l'affichage */
-    eventTag() {
+    eventTag(objetTag) {
+        
         // ecoute l'evenement clique pour creer les tags
         const divs = document.querySelectorAll('.item')
 
@@ -129,7 +129,9 @@ export class FilterTag {
             var transformId = targetDisplay.replace('item-', 'tag-')
             var tagToDsisplay = document.getElementById(transformId)
             tagToDsisplay.classList.add('activeTag')
-            this.selectTag.push(el.target.textContent)
+            objetTag.tags.push(el.target.textContent)
+            
+            return objetTag.tags
         }))
         // ecoute l'evenement clique pour suprimer les tag
         const closeTag = document.querySelectorAll('.fa-xmark')
@@ -139,8 +141,10 @@ export class FilterTag {
             var tagToClose = document.getElementById(transformValue)
             tagToClose.classList.remove('activeTag')
             var transformTagToItem = retourTarget.replace('close-tag', 'item')
-            let indexToSuprime = this.selectTag.indexOf(document.getElementById(transformTagToItem).textContent)
-            this.selectTag.splice(indexToSuprime, 1)
+            let indexToSuprime = objetTag.tags.indexOf(document.getElementById(transformTagToItem).textContent)
+            objetTag.tags.splice(indexToSuprime, 1)
+           
+            return objetTag.tags
         }))
     }
     
