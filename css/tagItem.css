@@ -23,8 +23,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: var(--bg-primary);
-    border: 1px solid var(--bg-primary);
+    color: #ffffff;
+    border: 1px solid #ffffff;
     width: 18px;
     height: 18px;
     font-size: 16px;
@@ -39,7 +39,7 @@
 
 .textTag{
     margin-right: 10px;
-    color: var(--bg-primary);
+    color: #ffffff;
 }
 .tagSelect-ingredient,
 .tagSelect-appareil,

@@ -16,13 +16,25 @@
 .dropdown-content {
     display: none;
     flex-direction: column;
+    flex-wrap: wrap;
     position: absolute;
-    min-width: 160px;
+    min-width: 600px;
+    
+    max-height: 600px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
+    
+    
+    overflow:scroll;
+    scrollbar-color: black var(--bg-primary);
+    scrollbar-width: auto;
+    
 }
+
+  
 .dropdown-content p {
-    color: var(--bg-primary);
+    font-size: 13px;
+    color: #ffffff;
     padding: 5px 8px;
     margin: 0;
 }

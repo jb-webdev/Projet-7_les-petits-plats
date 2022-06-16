@@ -97,11 +97,9 @@ class Index {
 		})
 		// on lance le premier affichage des recettes
 		this.displayReceips(recipeData)
-		
+
 		// on ecoute les evenements au niveau des tags
 		ClassTagFilter.eventTag(this.essaiRecherche)
-		
-		
 		
 		// j'ecoute l'evenement dans mon input pour la recherche de recette
 		this.eventResearchBar.addEventListener('input', e => {
