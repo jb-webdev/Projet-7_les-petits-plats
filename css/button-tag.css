@@ -1,83 +1,118 @@
+
 .wrapperBtn {
     margin-top: 10px;
     margin-bottom: 10px;
-}
-.dropbtn {
-    color: var(--bg-primary);
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
+    display: flex;
+    flex-direction: row;
 }
 .dropdown {
     position: relative;
     display: inline-block;
 }
-.dropdown-content {
-    display: none;
+.dropdownTag{
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+.dropdownInput{
+    width: 150px;
+    border-right: none;
+    padding: 5px;
+    height: 20px;
+    color: #ffffff;
+    outline: none;
+}
+.btnInput{
+    display: flex;
+    width: 25px;
+    height: 36px;
+    text-align: center;
+    color: #ffffff;
+    justify-content: center;
+    align-items: center;
+}
+.dropdown-contentInput{
     flex-direction: column;
     flex-wrap: wrap;
     position: absolute;
-    min-width: 600px;
-    
-    max-height: 600px;
+    padding-bottom: 10px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
-    
-    
     overflow:scroll;
     scrollbar-color: black var(--bg-primary);
     scrollbar-width: auto;
     
 }
-
-  
-.dropdown-content p {
-    font-size: 13px;
+.dropdown-contentInput p {
+    font-size: 18px;
     color: #ffffff;
     padding: 5px 8px;
     margin: 0;
 }
-/* Change color of dropdown links on hover */
-.dropdown-content p:hover {
+.dropdown-contentInput p:hover {
     cursor: pointer;
     color: black;
     background-color: #f1f1f1
 }
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
-    display: flex;
+
+/*.dropdown:hover .dropdown-contentInput{display: flex;}*/
+
+/* Button Ingredient */
+.dropdownInputIngredient{
+    border: 3px solid var(--color-Blue);
+    background: var(--color-Blue);
 }
-/* Button ingredient */
-.dropbtnIngredient{
+.btnInputIngredient{
+    background: var(--color-Blue);
+}
+.dropdown-contentInput-ingredient{
     background-color: var(--color-Blue);
-}
-.dropdown-content-ingredient{
-    background-color: var(--color-Blue);
-}
-.dropdownIngredient:hover .dropbtnIngredient{
-    background-color: var(--color-Blue-hover);
-}
-/* Button Appareils */
-.dropbtnAppareils {
-    background-color: var(--color-red);
-}
-.dropdown-content-appareils{
-    background-color: var(--color-red);
-}
-.dropdownAppareils:hover .dropbtnAppareils{
-    background-color: var(--color-red-hover);
+    min-width: 195px;
+    max-width: 400px;
+    max-height: 300px;
 }
 
+/* Button Appareils */
+.dropdownInputAppareils{
+    border: 3px solid var(--color-red);
+    background: var(--color-red);
+}
+.btnInputAppareils{
+    background: var(--color-red);
+}
+.dropdown-contentInput-appareils{
+    display: flex;
+    background-color: var(--color-red);
+}
+
+
 /* Button Ustensils */
-.dropbtnUstensils {
-    background-color: var(--color-green);
+.dropdownInputUstensils{
+    border: 3px solid var(--color-green);
+    background: var(--color-green);
 }
-.dropdown-content-ustensils{
-    background-color: var(--color-green);
+.btnInputUstensils{
+    background: var(--color-green);
 }
-.dropdownUstensils:hover .dropbtnUstensils{
-    background-color: var(--color-green-hover);
+.dropdown-contentInput-ustensils{
+    background-color: var(--color-green);
+    min-width: 195px;
+    max-width: 400px;
+    max-height: 300px;
+}
+
+
+
+
+.inactiveBox,
+.inactiveItem {
+    display: none
+}
+.activeBox,
+.activeItem {
+    display: flex;
 }
 
 

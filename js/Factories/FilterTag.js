@@ -6,6 +6,9 @@ export class FilterTag {
         this.ustensilsArray = []
 	}
 
+    /** Methode pour la création de mes liste de tags que je stock dans des array 
+     * this.ingredientsArray && this.appliancesArray && this.ustensilsArray
+     */
 	createIngredientsArray(){
         let array = [];
         let itemIngredients = [];
@@ -48,88 +51,146 @@ export class FilterTag {
         this.ustensilsArray = itemsUstensils.filter((item, index) => itemsUstensils.indexOf(item) === index).sort();
         return this.ustensilsArray
     }
-    /** methode pour creer les items de choix dans les buttons */
-    createList(container, array, expr) {
-        const wrapperIngredient = document.querySelector(container)
-        var compteur = 0
-
-        for (let i = 0; i < array.length; i++) {
-            const itemElement = document.createElement('p')
-            switch (expr) {
-                case 'ingredients':
-                    var constructionIdItem = `item-ingredient-${compteur}`
-                    itemElement.setAttribute('id', constructionIdItem)
-                    itemElement.setAttribute('class', 'item item-ingredient')
-                    break;
-                case 'appareils':
-                    var constructionIdItem = `item-appareil-${compteur}`
-                    itemElement.setAttribute('id', constructionIdItem)
-                    itemElement.setAttribute('class', 'item item-appareil')
-                    break;
-                case 'ustensils':
-                    var constructionIdItem = `item-ustensil-${compteur}`
-                    itemElement.setAttribute('id', constructionIdItem)
-                    itemElement.setAttribute('class', 'item item-ustensil')
-                    break;
-                default:
-                    console.log(`error`);
-            }
-            itemElement.innerHTML = array[i]
-            wrapperIngredient.appendChild(itemElement)
-            compteur = compteur + 1
-        }
-
-
-    }
     /** methode pour creer les tags non afficher à l'ecran */
-    createTag (array, expr) {
+    createTag(array, expr, wrapperItem) {
         const wrapperTag = document.getElementById('wrapperTag')
+        const WrapperItem = document.getElementById(wrapperItem)
         var compteur = 0
         for (let i = 0; i < array.length; i++) {
-            const tagElement = document.createElement('div')
             
+            const tagElement = document.createElement('div')
+            const itemElement = document.createElement('p')
+
             switch (expr) {
                 case 'ingredients':
-                    var idTgTransform = `tag-ingredient-${compteur}`
-                    tagElement.setAttribute('id', `${idTgTransform}`)
+                    var idTagTransform = `tag-ingredient-${compteur}`
+                    var idItemTransform = `item-ingredient-${compteur}`
+                    tagElement.setAttribute('id', `${idTagTransform}`)
                     tagElement.setAttribute('class', `tagSelect tagSelect-ingredient`)
+                    itemElement.setAttribute('id', `${idItemTransform}`)
+                    itemElement.setAttribute('class', 'item item-ingredient inactiveItem')
+                    itemElement.innerHTML = `${array[i]}`
+
                     break;
                 case 'appareils':
-                    var idTgTransform = `tag-appareil-${compteur}`
-                    tagElement.setAttribute('id', `${idTgTransform}`)
+                    var idTagTransform = `tag-appareil-${compteur}`
+                    var idItemTransform = `item-appareil-${compteur}`
+                    tagElement.setAttribute('id', `${idTagTransform}`)
                     tagElement.setAttribute('class', `tagSelect tagSelect-appareil`)
+                    itemElement.setAttribute('id', `${idItemTransform}`)
+                    itemElement.setAttribute('class', 'item item-appareil inactiveItem')
+                    itemElement.innerHTML = `${array[i]}`
                     break;
                 case 'ustensils':
-                    var idTgTransform = `tag-ustensil-${compteur}`
-                    tagElement.setAttribute('id', `${idTgTransform}`)
+                    var idTagTransform = `tag-ustensil-${compteur}`
+                    var idItemTransform = `item-ustensil-${compteur}`
+                    tagElement.setAttribute('id', `${idTagTransform}`)
                     tagElement.setAttribute('class', `tagSelect tagSelect-ustensil`)
+                    itemElement.setAttribute('id', `${idItemTransform}`)
+                    itemElement.setAttribute('class', 'item item-ustensil inactiveItem')
+                    itemElement.innerHTML = `${array[i]}`
                     break;
                 default:
                     console.log(`error`);
             }
             const htmlContentTag = `
-              <span class="closetag"><i id=close-${idTgTransform} class="fa-solid fa-xmark"></i></span>
-              <p class="textTag">${array[i]}</p>
-          `
+          <span class="closetag"><i id=close-${idTagTransform} class="fa-solid fa-xmark"></i></span>
+          <p class="textTag">${array[i]}</p>
+      `
             tagElement.innerHTML = htmlContentTag
             wrapperTag.appendChild(tagElement)
+            WrapperItem.appendChild(itemElement)
             compteur = compteur + 1
         }
-
-        
     }
+    /** Methode pour initialiser les tags et les items en display none */
+    initTagAndItem(){
+        /** On appel la methode pour creer nos array */
+        this.createIngredientsArray()
+		this.createApplianceArray()
+		this.createUstensilsArray()
+        this.createTag(this.ingredientsArray, 'ingredients', 'wrapperInputIngredient')
+        this.createTag(this.appliancesArray, 'appareils', 'wrapperInputAppareils')
+        this.createTag(this.ustensilsArray, 'ustensils', 'wrapperInputUstensils')
+
+    }
+    
+    /** methode display item et dropdown */
+    eventInputItem() {
+        const inputTagIngredient = document.getElementById('researchTagIngredient')
+        const inputTagAppareils = document.getElementById('researchTagAppareils')
+        const inputTagUstensils = document.getElementById('researchTagUstensils')
+        
+        const arrowIngredient = document.getElementById('arrowIngredient')
+        const moveItem = (targetValue, itemClass, array, contentInput) => {
+            var elementItem = document.querySelectorAll(itemClass)
+            const dropDownDisplayIngredient = document.querySelector(contentInput)        
+            if (targetValue.length > 2) {
+                var filteredTagValue
+                filteredTagValue = array.filter(element => element.toLowerCase().includes(targetValue))
+                for (let i = 0; i < filteredTagValue.length; i++){
+                    elementItem.forEach(element => {
+                       if (element.textContent === filteredTagValue[i]) {
+                        dropDownDisplayIngredient.classList.remove('inactiveBox')
+                        dropDownDisplayIngredient.classList.add('activeBox')
+                        var displayItemIngredient = document.getElementById(element.id)
+                        displayItemIngredient.classList.remove('inactiveItem')
+                        displayItemIngredient.classList.add('activeItem')
+                       }
+                    })
+                }
+            } else if (targetValue.length < 3 || targetValue.length === 0) {
+                elementItem.forEach(element => {
+                    var closeItemIngredient = document.getElementById(element.id)
+                    closeItemIngredient.classList.remove('activeItem')
+                    closeItemIngredient.classList.add('inactiveItem')
+                    dropDownDisplayIngredient.classList.remove('activeBox')
+                    dropDownDisplayIngredient.classList.add('inactiveBox')
+                })
+            }
+        }
+
+        inputTagIngredient.addEventListener('input', e => {
+            moveItem(e.target.value, '.item-ingredient', this.ingredientsArray, '.dropdown-contentInput-ingredient')
+        })
+
+        inputTagAppareils.addEventListener('input', e => {
+            moveItem(e.target.value, '.item-appareil', this.appliancesArray, '.dropdown-contentInput-appareils')
+        })
+
+        inputTagUstensils.addEventListener('input', e => {
+            moveItem(e.target.value, '.item-ustensil', this.ustensilsArray, '.dropdown-contentInput-ustensils')
+        })
+    }
+
+    
     /** methode pour afficher les tag ou les suprimer de l'affichage */
     eventTag(objetTag) {
         
         // ecoute l'evenement clique pour creer les tags
         const divs = document.querySelectorAll('.item')
-
+        
         divs.forEach(el => el.addEventListener('click', el => {
             var targetDisplay = el.target.id
-            var transformId = targetDisplay.replace('item-', 'tag-')
+            var transformId = targetDisplay.replace('item', 'tag')
             var tagToDsisplay = document.getElementById(transformId)
             tagToDsisplay.classList.add('activeTag')
+            /** on stock le choix dans l'objet de recherche */
             objetTag.tags.push(el.target.textContent)
+            /** On recupere la balise qui a comme class activeBox */
+            var parentActiveBox = document.querySelector('.activeBox')
+            var getIdActiveBoxClass = document.getElementById(parentActiveBox.id)
+            var removeClass = document.getElementById(getIdActiveBoxClass.id)
+            /** on modifie la class pour fermer la recherche après la selection */
+            removeClass.classList.remove('activeBox')
+            removeClass.classList.add('inactiveBox')
+            var transformGetIdActiveBoxClass = getIdActiveBoxClass.id.replace('wrapperInput', 'researchTag')
+            /** On vide la barre de recherche des tag pour repartir à zéro */
+            document.getElementById(transformGetIdActiveBoxClass).value = ''
+
+            
+            console.log(objetTag.tags)
+
             
             return objetTag.tags
         }))
@@ -143,9 +204,10 @@ export class FilterTag {
             var transformTagToItem = retourTarget.replace('close-tag', 'item')
             let indexToSuprime = objetTag.tags.indexOf(document.getElementById(transformTagToItem).textContent)
             objetTag.tags.splice(indexToSuprime, 1)
-           
+            console.log(objetTag.tags)
             return objetTag.tags
         }))
     }
+    
     
 }
