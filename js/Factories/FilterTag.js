@@ -193,9 +193,7 @@ export class FilterTag {
             var transformGetIdActiveBoxClass = getIdActiveBoxClass.id.replace('wrapperInput', 'researchTag')
             /** On vide la barre de recherche des tag pour repartir à zéro */
             document.getElementById(transformGetIdActiveBoxClass).value = ''
-
-            
-            console.log(objetTag.tags)
+            //console.log(objetTag.tags)
 
             
             return objetTag.tags
@@ -210,7 +208,7 @@ export class FilterTag {
             var transformTagToItem = retourTarget.replace('close-tag', 'item')
             let indexToSuprime = objetTag.tags.indexOf(document.getElementById(transformTagToItem).textContent)
             objetTag.tags.splice(indexToSuprime, 1)
-            console.log(objetTag.tags)
+            //console.log(objetTag.tags)
             return objetTag.tags
         }))
     }

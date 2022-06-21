@@ -90,3 +90,24 @@
     margin: 0;
     font-size: 14px;
 }
+
+/* ERROR CARD */
+
+.cardError{
+    background-color: #a49a9a;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border: 2px solid red;
+    border-radius: 10px;
+}
+.cardError p {
+    margin: 0;
+}
+.cardErrorActive{
+    display: flex;
+}
+.cardErrorInactive{
+    display: none;
+}

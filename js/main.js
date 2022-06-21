@@ -13,39 +13,13 @@ class Index {
 		this.objetTagRecherche = new Object()
 	}
 	/**
-		 * Recherche via TITRE, INGREDIENTS, DESCRIPTION avec la searchBar
-		 
-		 * @param {*Array} recipeData 
-		 * @returns
-		 */
-	filterAlgo2(recipeData) {
-		var filteredReceipes = []
-		for (let i = 0; i < recipeData.length; i++) {
-			if (recipeData[i].name.toLowerCase().includes(this.objetTagRecherche.bar) ||
-			recipeData[i].description.toLowerCase().includes(this.objetTagRecherche.bar) ||
-			recipeData[i].ingredients.some(ingredient => ingredient.ingredient.includes(this.objetTagRecherche.bar))) {
-				filteredReceipes.push(recipeData[i])
-			}
-		}
-
-		return filteredReceipes
-	}
-
-	/**
-	 * Affiche les cartes de recettes selon les data reçu
-	 * @param {*Array} datasRecipe 
-	 * @param {*String} recherche 
+	 * filtre les recettes selon le choix de l'utilisateur
+	 * @param {*Array} datasRecipe
 	 */
 	displayReceips(datasRecipe) {
 		this.containerRecipeCards.innerHTML = ''
-
 		// quand la barre de recherche et que aucun tags n'est selectionner on affiche toutes les recettes
 		if (this.objetTagRecherche.bar === '' && this.objetTagRecherche.tags.length === 0) {
-			console.log('======première condition =========')
-			console.log(this.objetTagRecherche.bar)
-			console.log(this.objetTagRecherche.tags.length)
-			console.log('on affiche toutes les recettes')
-			console.log('==================================')
 			datasRecipe
 				.map(recipe => new Recipe(recipe))
 				.forEach(recipe => {
@@ -55,15 +29,10 @@ class Index {
 					)
 				})
 		} else if (this.objetTagRecherche.bar != '' && this.objetTagRecherche.tags.length === 0){
-			console.log('====== deuxième condition =========')
-			console.log(this.objetTagRecherche.bar)
-			console.log(this.objetTagRecherche.tags.length)
-			console.log('on fait un tri que par la bar de recherche')
-			console.log('==================================')
+		
 			var filtreArray = datasRecipe.filter(recipe => recipe.name.toLowerCase().includes(this.objetTagRecherche.bar ) ||
 			recipe.description.toLowerCase().includes(this.objetTagRecherche.bar) ||
 			recipe.ingredients.some(ingredient => ingredient.ingredient.includes(this.objetTagRecherche.bar)))
-			
 			
 			filtreArray.map(recipe => new Recipe(recipe))
 				.forEach(recipe => {
@@ -73,23 +42,13 @@ class Index {
 					)
 				})
 		} else if (this.objetTagRecherche.bar === '' && this.objetTagRecherche.tags.length > 0){
-			console.log('====== troisième condition =========')
-			console.log('=> ' + this.objetTagRecherche.bar)
-			console.log(this.objetTagRecherche.tags.length)
-			console.log('on fait un tri que par tags')
-			console.log('==================================')
-			
-			var firstFilter = datasRecipe.filter(recipe => recipe.name.toLowerCase().includes(this.objetTagRecherche.bar ) ||
-			recipe.description.toLowerCase().includes(this.objetTagRecherche.bar) ||
-			recipe.ingredients.some(ingredient => ingredient.ingredient.includes(this.objetTagRecherche.bar)))
-			console.log(firstFilter)
-
-			console.log(this.objetTagRecherche.tags.forEach(el => console.log(el)))
-			
-
-			/**modifier le tableau dataRecipe par le nouveau tableau */
-			var filtreArray = datasRecipe
-			filtreArray
+			var filterAllTags = datasRecipe
+			for ( let elementArray of this.objetTagRecherche.tags){
+				filterAllTags = filterAllTags.filter(recipe => recipe.name.toLowerCase().includes(elementArray) ||
+				recipe.description.toLowerCase().includes(elementArray) ||
+				recipe.ingredients.some(ingredient => ingredient.ingredient.includes(elementArray)))
+			}
+			filterAllTags
 				.map(recipe => new Recipe(recipe))
 				.forEach(recipe => {
 					const Factories = new Card(recipe)
@@ -98,13 +57,21 @@ class Index {
 					)
 				})
 		} else if (this.objetTagRecherche.bar != '' && this.objetTagRecherche.tags.length > 0){
-			console.log('====== quatrième condition =========')
-			console.log(this.objetTagRecherche.bar)
-			console.log(this.objetTagRecherche.tags.length)
-			console.log('on fait un tri complet')
-			console.log('==================================')
 
-			datasRecipe
+			var firstResearch = datasRecipe.filter(
+				recipe => recipe.name.toLowerCase().includes(this.objetTagRecherche.bar ) ||
+				recipe.description.toLowerCase().includes(this.objetTagRecherche.bar) ||
+				recipe.ingredients.some(ingredient => ingredient.ingredient.includes(this.objetTagRecherche.bar))
+				)
+
+			var AllFilterResearch = firstResearch
+			for ( let elementArray of this.objetTagRecherche.tags){
+				AllFilterResearch = AllFilterResearch.filter(recipe => recipe.name.toLowerCase().includes(elementArray) ||
+				recipe.description.toLowerCase().includes(elementArray) ||
+				recipe.ingredients.some(ingredient => ingredient.ingredient.includes(elementArray)))
+			}
+			
+			AllFilterResearch
 				.map(recipe => new Recipe(recipe))
 				.forEach(recipe => {
 					const Factories = new Card(recipe)
@@ -114,22 +81,20 @@ class Index {
 				})
 		}
 	}
-
 	async main() {
 		const recipeData = await this.receiptsProvider.getDataReceipts()
 		// on gere notre objet de recherche
 		this.objetTagRecherche.bar = ''
 		this.objetTagRecherche.tags = []
-		/** on creer nos tags de recherche */
+		
 		const ClassTagFilter = new FilterTag(recipeData)
+		// on initialise nos tags et nos item selon notre base de données fourni
 		ClassTagFilter.initTagAndItem()
 		ClassTagFilter.eventInputItem()
+		// on mets en place notre écouteur d'évenement
 		ClassTagFilter.eventTag(this.objetTagRecherche)
-		
-		// on lance le premier affichage des recettes
+		// on lance le premier affichage de toute les recettes
 		this.displayReceips(recipeData)
-
-
 		// j'ecoute l'evenement dans mon input pour la recherche de recette
 		this.eventResearchBar.addEventListener('input', e => {
 			var valueInput = e.target.value
@@ -138,7 +103,6 @@ class Index {
 				this.displayReceips(recipeData)
 			}
 		})
-
 		/** on gerer le button de la barre de recherche pour lancer la fonction */
 		const btnRecherche = document.querySelector('.btnFormResearch')
 		btnRecherche.addEventListener('click', e => {
