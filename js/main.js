@@ -18,19 +18,6 @@ class Index {
 		 * @param {*Array} recipeData 
 		 * @returns
 		 */
-	filterAlgo1(recipeData) {
-		
-		var filteredReceipes
-
-		
-		if (this.objetTagRecherche.bar != ''){
-			filteredReceipes = recipeData.filter(recipe => recipe.name.toLowerCase().includes(this.objetTagRecherche.bar ) ||
-			recipe.description.toLowerCase().includes(this.objetTagRecherche.bar) ||
-			recipe.ingredients.some(ingredient => ingredient.ingredient.includes(this.objetTagRecherche.bar)))
-			
-		}
-		return filteredReceipes
-	}
 	filterAlgo2(recipeData) {
 		var filteredReceipes = []
 		for (let i = 0; i < recipeData.length; i++) {
@@ -54,6 +41,11 @@ class Index {
 
 		// quand la barre de recherche et que aucun tags n'est selectionner on affiche toutes les recettes
 		if (this.objetTagRecherche.bar === '' && this.objetTagRecherche.tags.length === 0) {
+			console.log('======première condition =========')
+			console.log(this.objetTagRecherche.bar)
+			console.log(this.objetTagRecherche.tags.length)
+			console.log('on affiche toutes les recettes')
+			console.log('==================================')
 			datasRecipe
 				.map(recipe => new Recipe(recipe))
 				.forEach(recipe => {
@@ -62,13 +54,58 @@ class Index {
 						Factories.createRecipeCard()
 					)
 				})
-		} else if (this.objetTagRecherche.bar != '' || this.objetTagRecherche.tags.length > 0){
-
-			//var filtreArray = this.filterAlgo1(datasRecipe)
-			var filtreArray = this.filterAlgo1(datasRecipe)
+		} else if (this.objetTagRecherche.bar != '' && this.objetTagRecherche.tags.length === 0){
+			console.log('====== deuxième condition =========')
+			console.log(this.objetTagRecherche.bar)
+			console.log(this.objetTagRecherche.tags.length)
+			console.log('on fait un tri que par la bar de recherche')
+			console.log('==================================')
+			var filtreArray = datasRecipe.filter(recipe => recipe.name.toLowerCase().includes(this.objetTagRecherche.bar ) ||
+			recipe.description.toLowerCase().includes(this.objetTagRecherche.bar) ||
+			recipe.ingredients.some(ingredient => ingredient.ingredient.includes(this.objetTagRecherche.bar)))
 			
 			
 			filtreArray.map(recipe => new Recipe(recipe))
+				.forEach(recipe => {
+					const Factories = new Card(recipe)
+					this.containerRecipeCards.appendChild(
+						Factories.createRecipeCard()
+					)
+				})
+		} else if (this.objetTagRecherche.bar === '' && this.objetTagRecherche.tags.length > 0){
+			console.log('====== troisième condition =========')
+			console.log('=> ' + this.objetTagRecherche.bar)
+			console.log(this.objetTagRecherche.tags.length)
+			console.log('on fait un tri que par tags')
+			console.log('==================================')
+			
+			var firstFilter = datasRecipe.filter(recipe => recipe.name.toLowerCase().includes(this.objetTagRecherche.bar ) ||
+			recipe.description.toLowerCase().includes(this.objetTagRecherche.bar) ||
+			recipe.ingredients.some(ingredient => ingredient.ingredient.includes(this.objetTagRecherche.bar)))
+			console.log(firstFilter)
+
+			console.log(this.objetTagRecherche.tags.forEach(el => console.log(el)))
+			
+
+			/**modifier le tableau dataRecipe par le nouveau tableau */
+			var filtreArray = datasRecipe
+			filtreArray
+				.map(recipe => new Recipe(recipe))
+				.forEach(recipe => {
+					const Factories = new Card(recipe)
+					this.containerRecipeCards.appendChild(
+						Factories.createRecipeCard()
+					)
+				})
+		} else if (this.objetTagRecherche.bar != '' && this.objetTagRecherche.tags.length > 0){
+			console.log('====== quatrième condition =========')
+			console.log(this.objetTagRecherche.bar)
+			console.log(this.objetTagRecherche.tags.length)
+			console.log('on fait un tri complet')
+			console.log('==================================')
+
+			datasRecipe
+				.map(recipe => new Recipe(recipe))
 				.forEach(recipe => {
 					const Factories = new Card(recipe)
 					this.containerRecipeCards.appendChild(
@@ -106,6 +143,7 @@ class Index {
 		const btnRecherche = document.querySelector('.btnFormResearch')
 		btnRecherche.addEventListener('click', e => {
 			e.preventDefault()
+			this.objetTagRecherche.bar = this.eventResearchBar.value
 			this.displayReceips(recipeData)
 		})
 		

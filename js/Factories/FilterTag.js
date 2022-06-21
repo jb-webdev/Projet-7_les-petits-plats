@@ -114,16 +114,16 @@ export class FilterTag {
         this.createTag(this.ustensilsArray, 'ustensils', 'wrapperInputUstensils')
 
     }
-    
     /** methode display item et dropdown */
     eventInputItem() {
         const inputTagIngredient = document.getElementById('researchTagIngredient')
         const inputTagAppareils = document.getElementById('researchTagAppareils')
         const inputTagUstensils = document.getElementById('researchTagUstensils')
-        
-        const arrowIngredient = document.getElementById('arrowIngredient')
-        const moveItem = (targetValue, itemClass, array, contentInput) => {
+    
+        const moveItem = (targetValue, itemClass, array, contentInput, arrowChangeValue) => {
             var elementItem = document.querySelectorAll(itemClass)
+            const arrowChange = document.getElementById(arrowChangeValue)
+
             const dropDownDisplayIngredient = document.querySelector(contentInput)        
             if (targetValue.length > 2) {
                 var filteredTagValue
@@ -133,6 +133,8 @@ export class FilterTag {
                        if (element.textContent === filteredTagValue[i]) {
                         dropDownDisplayIngredient.classList.remove('inactiveBox')
                         dropDownDisplayIngredient.classList.add('activeBox')
+                        arrowChange.classList.remove('fa-angle-up')
+                        arrowChange.classList.add('fa-angle-down')
                         var displayItemIngredient = document.getElementById(element.id)
                         displayItemIngredient.classList.remove('inactiveItem')
                         displayItemIngredient.classList.add('activeItem')
@@ -146,24 +148,24 @@ export class FilterTag {
                     closeItemIngredient.classList.add('inactiveItem')
                     dropDownDisplayIngredient.classList.remove('activeBox')
                     dropDownDisplayIngredient.classList.add('inactiveBox')
+                    arrowChange.classList.remove('fa-angle-down')
+                        arrowChange.classList.add('fa-angle-up')
                 })
             }
         }
 
         inputTagIngredient.addEventListener('input', e => {
-            moveItem(e.target.value, '.item-ingredient', this.ingredientsArray, '.dropdown-contentInput-ingredient')
+            moveItem(e.target.value, '.item-ingredient', this.ingredientsArray, '.dropdown-contentInput-ingredient', 'arrowIngredient')
         })
 
         inputTagAppareils.addEventListener('input', e => {
-            moveItem(e.target.value, '.item-appareil', this.appliancesArray, '.dropdown-contentInput-appareils')
+            moveItem(e.target.value, '.item-appareil', this.appliancesArray, '.dropdown-contentInput-appareils', 'arrowAppareils')
         })
 
         inputTagUstensils.addEventListener('input', e => {
-            moveItem(e.target.value, '.item-ustensil', this.ustensilsArray, '.dropdown-contentInput-ustensils')
+            moveItem(e.target.value, '.item-ustensil', this.ustensilsArray, '.dropdown-contentInput-ustensils', 'arrowUstensils')
         })
     }
-
-    
     /** methode pour afficher les tag ou les suprimer de l'affichage */
     eventTag(objetTag) {
         
@@ -181,6 +183,10 @@ export class FilterTag {
             var parentActiveBox = document.querySelector('.activeBox')
             var getIdActiveBoxClass = document.getElementById(parentActiveBox.id)
             var removeClass = document.getElementById(getIdActiveBoxClass.id)
+            /** On modifie la position de la flèche après la selection par clique */
+            var arrowId = document.getElementById(removeClass.id.replace('wrapperInput', 'arrow'))
+            arrowId.classList.remove('fa-angle-down')
+            arrowId.classList.add('fa-angle-up')
             /** on modifie la class pour fermer la recherche après la selection */
             removeClass.classList.remove('activeBox')
             removeClass.classList.add('inactiveBox')
@@ -208,6 +214,4 @@ export class FilterTag {
             return objetTag.tags
         }))
     }
-    
-    
 }

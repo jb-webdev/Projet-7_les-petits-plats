@@ -8,7 +8,6 @@ export class Card {
 		divCard.setAttribute('class', "card")
         divCard.setAttribute('id', `${this._recipe._id}`)
         
-
 		const templateCard = `
                 <div class="card-header">
                     <p class="img">Image</p>
