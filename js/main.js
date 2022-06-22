@@ -18,6 +18,18 @@ class Index {
 	 */
 	displayReceips(datasRecipe) {
 		this.containerRecipeCards.innerHTML = ''
+		/** Function Algo 2 */
+		function filterData(term, arrayToLoop) {
+			var filteredReceipes = []
+			for (let i = 0; i < arrayToLoop.length; i++){
+				if(arrayToLoop[i].name.toLowerCase().includes(term) || 
+				arrayToLoop[i].description.toLowerCase().includes(term) ||
+				arrayToLoop[i].ingredients.some( ingredient => ingredient.ingredient.includes(term))) {
+					filteredReceipes.push(arrayToLoop[i])
+				}
+			}
+		   return filteredReceipes
+		}
 		// quand la barre de recherche et que aucun tags n'est selectionner on affiche toutes les recettes
 		if (this.objetTagRecherche.bar === '' && this.objetTagRecherche.tags.length === 0) {
 			datasRecipe
@@ -29,11 +41,10 @@ class Index {
 					)
 				})
 		} else if (this.objetTagRecherche.bar != '' && this.objetTagRecherche.tags.length === 0){
-		
-			var filtreArray = datasRecipe.filter(recipe => recipe.name.toLowerCase().includes(this.objetTagRecherche.bar ) ||
-			recipe.description.toLowerCase().includes(this.objetTagRecherche.bar) ||
-			recipe.ingredients.some(ingredient => ingredient.ingredient.includes(this.objetTagRecherche.bar)))
-			
+			// quand la barre de recherche et rempli et que aucun tags n'est selectionner on filtre qu'avec le term de la barre de recherche
+			let resultatRecherche = this.objetTagRecherche.bar
+			var filtreArray  = filterData(resultatRecherche, datasRecipe)
+
 			filtreArray.map(recipe => new Recipe(recipe))
 				.forEach(recipe => {
 					const Factories = new Card(recipe)
@@ -42,11 +53,10 @@ class Index {
 					)
 				})
 		} else if (this.objetTagRecherche.bar === '' && this.objetTagRecherche.tags.length > 0){
+			// quand la barre de recherche et vide et au moins un tags est selectionné on filtre qu'avec les terms des tags
 			var filterAllTags = datasRecipe
-			for ( let elementArray of this.objetTagRecherche.tags){
-				filterAllTags = filterAllTags.filter(recipe => recipe.name.toLowerCase().includes(elementArray) ||
-				recipe.description.toLowerCase().includes(elementArray) ||
-				recipe.ingredients.some(ingredient => ingredient.ingredient.includes(elementArray)))
+			for (let i = 0; i < this.objetTagRecherche.tags.length; i++){
+				filterAllTags = filterData(this.objetTagRecherche.tags[i], filterAllTags)
 			}
 			filterAllTags
 				.map(recipe => new Recipe(recipe))
@@ -57,20 +67,12 @@ class Index {
 					)
 				})
 		} else if (this.objetTagRecherche.bar != '' && this.objetTagRecherche.tags.length > 0){
-
-			var firstResearch = datasRecipe.filter(
-				recipe => recipe.name.toLowerCase().includes(this.objetTagRecherche.bar ) ||
-				recipe.description.toLowerCase().includes(this.objetTagRecherche.bar) ||
-				recipe.ingredients.some(ingredient => ingredient.ingredient.includes(this.objetTagRecherche.bar))
-				)
-
-			var AllFilterResearch = firstResearch
-			for ( let elementArray of this.objetTagRecherche.tags){
-				AllFilterResearch = AllFilterResearch.filter(recipe => recipe.name.toLowerCase().includes(elementArray) ||
-				recipe.description.toLowerCase().includes(elementArray) ||
-				recipe.ingredients.some(ingredient => ingredient.ingredient.includes(elementArray)))
+			// quand la barre de recherche et au moins un tags est selectionné on filtre l'ensemble de la recherche
+			let resultatRecherche = this.objetTagRecherche.bar
+			var AllFilterResearch = filterData(resultatRecherche, datasRecipe)
+			for (let i = 0; i < this.objetTagRecherche.tags.length; i++){
+				AllFilterResearch = filterData(this.objetTagRecherche.tags[i], AllFilterResearch)
 			}
-			
 			AllFilterResearch
 				.map(recipe => new Recipe(recipe))
 				.forEach(recipe => {
