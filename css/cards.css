@@ -94,6 +94,7 @@
 /* ERROR CARD */
 
 .cardError{
+    display: flex;
     background-color: #a49a9a;
     width: 100%;
     align-items: center;
@@ -104,10 +105,4 @@
 }
 .cardError p {
     margin: 0;
-}
-.cardErrorActive{
-    display: flex;
-}
-.cardErrorInactive{
-    display: none;
 }
