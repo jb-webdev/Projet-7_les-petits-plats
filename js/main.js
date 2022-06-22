@@ -11,6 +11,7 @@ class Index {
 		this.recherche = ''
 		this.eventResearchBar = document.getElementById('inputResearch')
 		this.objetTagRecherche = new Object()
+		this.cardError = document.querySelector('.cardError')
 	}
 	/**
 	 * filtre les recettes selon le choix de l'utilisateur
@@ -18,6 +19,33 @@ class Index {
 	 */
 	displayReceips(datasRecipe) {
 		this.containerRecipeCards.innerHTML = ''
+		/** Fonction pour l'affichage de la carte Error avec redirection */
+		const displayCardError = () => {
+			const cardsError = `
+			<div class="cardError">
+				<p><strong>Error</strong></p>
+				<p>La recette n'existe pas !</p>
+				<p>Ou bien un ou plusieurs critère doit être modifier ou suprimé</p>
+				<p>vous pouvez rechercher par exemple : <strong>COCO</strong></p>
+				<p>le moteur vous retournera les recettes contenant le therm <strong>COCO</strong></p>
+			</div>
+			`
+			this.containerRecipeCards.innerHTML = cardsError
+			setTimeout(() => {
+				this.containerRecipeCards.innerHTML = ''
+				this.eventResearchBar.value = ''
+				datasRecipe
+				.map(recipe => new Recipe(recipe))
+				.forEach(recipe => {
+					const Factories = new Card(recipe)
+					this.containerRecipeCards.appendChild(
+						Factories.createRecipeCard()
+					)
+				})
+			}, 3000)
+			
+		}
+
 		// quand la barre de recherche et que aucun tags n'est selectionner on affiche toutes les recettes
 		if (this.objetTagRecherche.bar === '' && this.objetTagRecherche.tags.length === 0) {
 			datasRecipe
@@ -29,49 +57,60 @@ class Index {
 					)
 				})
 		} else if (this.objetTagRecherche.bar != '' && this.objetTagRecherche.tags.length === 0){
-		
+			// quand la barre de recherche a un therm et que aucun tags n'est selectionner on filtre le recettes par rapport a la barre de recherche seulement
 			var filtreArray = datasRecipe.filter(recipe => recipe.name.toLowerCase().includes(this.objetTagRecherche.bar ) ||
 			recipe.description.toLowerCase().includes(this.objetTagRecherche.bar) ||
 			recipe.ingredients.some(ingredient => ingredient.ingredient.includes(this.objetTagRecherche.bar)))
-			
-			filtreArray.map(recipe => new Recipe(recipe))
+			if (filtreArray.length === 0) {
+				displayCardError()
+			} else {
+				filtreArray.map(recipe => new Recipe(recipe))
 				.forEach(recipe => {
 					const Factories = new Card(recipe)
 					this.containerRecipeCards.appendChild(
 						Factories.createRecipeCard()
 					)
 				})
+			}
 		} else if (this.objetTagRecherche.bar === '' && this.objetTagRecherche.tags.length > 0){
-			var filterAllTags = datasRecipe
+			// quand la barre de recherche et vide et qu'au moins un tag est selectionné on filtre les recettes que par tags
+			var filtreArray = datasRecipe
 			for ( let elementArray of this.objetTagRecherche.tags){
-				filterAllTags = filterAllTags.filter(recipe => recipe.name.toLowerCase().includes(elementArray) ||
+				filtreArray = filtreArray.filter(recipe => recipe.name.toLowerCase().includes(elementArray) ||
 				recipe.description.toLowerCase().includes(elementArray) ||
 				recipe.ingredients.some(ingredient => ingredient.ingredient.includes(elementArray)))
 			}
-			filterAllTags
-				.map(recipe => new Recipe(recipe))
-				.forEach(recipe => {
-					const Factories = new Card(recipe)
-					this.containerRecipeCards.appendChild(
-						Factories.createRecipeCard()
-					)
-				})
+			if (filtreArray.length === 0) {
+				displayCardError()
+			} else{
+				filtreArray
+					.map(recipe => new Recipe(recipe))
+					.forEach(recipe => {
+						const Factories = new Card(recipe)
+						this.containerRecipeCards.appendChild(
+							Factories.createRecipeCard()
+						)
+					})
+			}
 		} else if (this.objetTagRecherche.bar != '' && this.objetTagRecherche.tags.length > 0){
-
+			// quand un therm dans la barre de recherche et au moins un tags et selectionné en filtre avec tous les critères
 			var firstResearch = datasRecipe.filter(
 				recipe => recipe.name.toLowerCase().includes(this.objetTagRecherche.bar ) ||
 				recipe.description.toLowerCase().includes(this.objetTagRecherche.bar) ||
 				recipe.ingredients.some(ingredient => ingredient.ingredient.includes(this.objetTagRecherche.bar))
 				)
 
-			var AllFilterResearch = firstResearch
+			var filtreArray = firstResearch
 			for ( let elementArray of this.objetTagRecherche.tags){
-				AllFilterResearch = AllFilterResearch.filter(recipe => recipe.name.toLowerCase().includes(elementArray) ||
+				filtreArray = filtreArray.filter(recipe => recipe.name.toLowerCase().includes(elementArray) ||
 				recipe.description.toLowerCase().includes(elementArray) ||
 				recipe.ingredients.some(ingredient => ingredient.ingredient.includes(elementArray)))
 			}
 			
-			AllFilterResearch
+			if (filtreArray.length === 0) {
+				displayCardError()
+			} else{
+				filtreArray
 				.map(recipe => new Recipe(recipe))
 				.forEach(recipe => {
 					const Factories = new Card(recipe)
@@ -79,6 +118,7 @@ class Index {
 						Factories.createRecipeCard()
 					)
 				})
+			}
 		}
 	}
 	async main() {
