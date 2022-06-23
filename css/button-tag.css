@@ -1,22 +1,41 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.14,
+* Autoprefixer: v10.4.7
+* Browsers: last 4 version
+*/
 
 .wrapperBtn {
     margin-top: 10px;
     margin-bottom: 10px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
     flex-direction: row;
 }
+
 .dropdown {
     position: relative;
     display: inline-block;
 }
-.dropdownTag{
+
+.dropdownTag {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
     flex-direction: row;
     margin-top: 10px;
     margin-bottom: 10px;
     margin-right: 10px;
 }
-.dropdownInput{
+
+.dropdownInput {
     width: 150px;
     border-right: none;
     padding: 5px;
@@ -24,54 +43,72 @@
     color: #ffffff;
     outline: none;
 }
-.btnInput{
+
+.btnInput {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     width: 25px;
     height: 36px;
     text-align: center;
     color: #ffffff;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
 }
-.dropdown-contentInput{
+
+.dropdown-contentInput {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
+    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     position: absolute;
     padding-bottom: 10px;
+    -webkit-box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
-    overflow:scroll;
+    overflow: scroll;
     scrollbar-color: black var(--bg-primary);
     scrollbar-width: auto;
-    
+
 }
+
 .dropdown-contentInput p {
     font-size: 18px;
     color: #ffffff;
     padding: 5px 8px;
     margin: 0;
 }
+
 .dropdown-contentInput p:focus,
 .dropdown-contentInput p:hover {
     cursor: pointer;
     color: black;
     background-color: #f1f1f1
 }
-.dropdown-contentInput p:focus{
+
+.dropdown-contentInput p:focus {
     outline: none;
 }
 
 /*.dropdown:hover .dropdown-contentInput{display: flex;}*/
 
 /* Button Ingredient */
-.dropdownInputIngredient{
+.dropdownInputIngredient {
     border: 3px solid var(--color-Blue);
     background: var(--color-Blue);
 }
-.btnInputIngredient{
+
+.btnInputIngredient {
     background: var(--color-Blue);
 }
-.dropdown-contentInput-ingredient{
+
+.dropdown-contentInput-ingredient {
     background-color: var(--color-Blue);
     min-width: 195px;
     max-width: 400px;
@@ -79,44 +116,48 @@
 }
 
 /* Button Appareils */
-.dropdownInputAppareils{
+.dropdownInputAppareils {
     border: 3px solid var(--color-red);
     background: var(--color-red);
 }
-.btnInputAppareils{
+
+.btnInputAppareils {
     background: var(--color-red);
 }
-.dropdown-contentInput-appareils{
+
+.dropdown-contentInput-appareils {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     background-color: var(--color-red);
 }
 
 
 /* Button Ustensils */
-.dropdownInputUstensils{
+.dropdownInputUstensils {
     border: 3px solid var(--color-green);
     background: var(--color-green);
 }
-.btnInputUstensils{
+
+.btnInputUstensils {
     background: var(--color-green);
 }
-.dropdown-contentInput-ustensils{
+
+.dropdown-contentInput-ustensils {
     background-color: var(--color-green);
     min-width: 195px;
     max-width: 400px;
     max-height: 300px;
 }
 
-
-
-
 .inactiveBox,
 .inactiveItem {
     display: none
 }
+
 .activeBox,
 .activeItem {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
 }
-
-
