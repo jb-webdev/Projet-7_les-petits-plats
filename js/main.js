@@ -43,7 +43,6 @@ class Index {
 					)
 				})
 			}, 3000)
-			
 		}
 		/** Function Algo 2 */
 		function filterData(term, arrayToLoop) {
@@ -51,7 +50,7 @@ class Index {
 			for (let i = 0; i < arrayToLoop.length; i++){
 				if(arrayToLoop[i].name.toLowerCase().includes(term) || 
 				arrayToLoop[i].description.toLowerCase().includes(term) ||
-				arrayToLoop[i].ingredients.some( ingredient => ingredient.ingredient.includes(term))) {
+				arrayToLoop[i].ingredients.some( ingredient => ingredient.ingredient.toLowerCase().includes(term))) {
 					filteredReceipes.push(arrayToLoop[i])
 				}
 			}
@@ -124,6 +123,8 @@ class Index {
 	}
 	async main() {
 		const recipeData = await this.receiptsProvider.getDataReceipts()
+		// on réinitialise s'aasure que notre barre de recherhce est vide
+		this.eventResearchBar.value = ''
 		// on gere notre objet de recherche
 		this.objetTagRecherche.bar = ''
 		this.objetTagRecherche.tags = []
@@ -151,7 +152,22 @@ class Index {
 			this.objetTagRecherche.bar = this.eventResearchBar.value
 			this.displayReceips(recipeData)
 		})
-		
+		// on ecoute l'evenement sur le close du tag pour renvoyé un affichage a l'utilisateur selon ca recherche initiale
+		document.querySelectorAll('.fa-xmark').forEach(el => el.addEventListener('click', el => {
+            this.displayReceips(recipeData)
+        }))
+		document.querySelectorAll('.item').forEach(el => el.addEventListener('click', el => {
+            this.displayReceips(recipeData)
+        }))
+		document.querySelectorAll('.item').forEach(el => el.addEventListener('click', el => {
+            this.displayReceips(recipeData)
+        }))
+		// on ecoute l'évenenment keypress pour lancer le filtre de recherche
+		document.querySelectorAll('.item').forEach(el => el.addEventListener('keypress', event => {
+			if (event.key === 'Enter'){
+				this.displayReceips(recipeData)
+			}
+        }))
 	}
 }
 

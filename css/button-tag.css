@@ -51,10 +51,14 @@
     padding: 5px 8px;
     margin: 0;
 }
+.dropdown-contentInput p:focus,
 .dropdown-contentInput p:hover {
     cursor: pointer;
     color: black;
     background-color: #f1f1f1
+}
+.dropdown-contentInput p:focus {
+    outline: none;
 }
 
 /*.dropdown:hover .dropdown-contentInput{display: flex;}*/
@@ -87,7 +91,6 @@
     background-color: var(--color-red);
 }
 
-
 /* Button Ustensils */
 .dropdownInputUstensils{
     border: 3px solid var(--color-green);
@@ -102,9 +105,6 @@
     max-width: 400px;
     max-height: 300px;
 }
-
-
-
 
 .inactiveBox,
 .inactiveItem {

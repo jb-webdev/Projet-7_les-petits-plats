@@ -138,6 +138,7 @@ export class FilterTag {
                         var displayItemIngredient = document.getElementById(element.id)
                         displayItemIngredient.classList.remove('inactiveItem')
                         displayItemIngredient.classList.add('activeItem')
+                        displayItemIngredient.setAttribute('tabindex', 0)
                        }
                     })
                 }
@@ -198,6 +199,34 @@ export class FilterTag {
             
             return objetTag.tags
         }))
+        divs.forEach(el => el.addEventListener('keypress', event => {
+            if (event.key === 'Enter') {
+                var targetDisplay = event.target.id
+                var transformId = targetDisplay.replace('item', 'tag')
+                var tagToDsisplay = document.getElementById(transformId)
+                tagToDsisplay.classList.add('activeTag')
+                /** on stock le choix dans l'objet de recherche */
+                objetTag.tags.push(event.target.textContent)
+                /** On recupere la balise qui a comme class activeBox */
+                var parentActiveBox = document.querySelector('.activeBox')
+                var getIdActiveBoxClass = document.getElementById(parentActiveBox.id)
+                var removeClass = document.getElementById(getIdActiveBoxClass.id)
+                /** On modifie la position de la flèche après la selection par clique */
+                var arrowId = document.getElementById(removeClass.id.replace('wrapperInput', 'arrow'))
+                arrowId.classList.remove('fa-angle-down')
+                arrowId.classList.add('fa-angle-up')
+                /** on modifie la class pour fermer la recherche après la selection */
+                removeClass.classList.remove('activeBox')
+                removeClass.classList.add('inactiveBox')
+                var transformGetIdActiveBoxClass = getIdActiveBoxClass.id.replace('wrapperInput', 'researchTag')
+                /** On vide la barre de recherche des tag pour repartir à zéro */
+                document.getElementById(transformGetIdActiveBoxClass).value = ''
+                //console.log(objetTag.tags)
+
+                return objetTag.tags
+            }
+        }))
+
         // ecoute l'evenement clique pour suprimer les tag
         const closeTag = document.querySelectorAll('.fa-xmark')
         closeTag.forEach(el => el.addEventListener('click', el => {
