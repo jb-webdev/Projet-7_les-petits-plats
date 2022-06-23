@@ -94,7 +94,7 @@ export class FilterTag {
                     console.log(`error`);
             }
             const htmlContentTag = `
-          <span class="closetag"><i id=close-${idTagTransform} class="fa-solid fa-xmark"></i></span>
+          <span class="closetag"><span id=close-${idTagTransform} class="fa-solid fa-xmark"></span></span>
           <p class="textTag">${array[i]}</p>
       `
             tagElement.innerHTML = htmlContentTag

@@ -21,9 +21,10 @@
     <main>
         <!-- Wrapper inputs-->
         <form action="" class="formReseach">
+            <label for="inputResearch" class="labelHidden">recherche une recette</label>
             <input id='inputResearch' type="text" placeholder="Rechercher une recette">
             <button class="btnFormResearch">
-                <span><i class="fa-solid fa-magnifying-glass"></i></span>
+                <span><span class="fa-solid fa-magnifying-glass"></span></span>
             </button>
 
         </form>
@@ -34,9 +35,10 @@
             <!-- Button Ingredient-->
             <div class="dropdown ">
                 <div class="dropdownTag">
+                    <label for="researchTagIngredient" class="labelHidden" >rechercher un ingrédient</label>
                     <input id="researchTagIngredient" class= "dropdownInput dropdownInputIngredient" type="text" placeholder="Ingredient">
                     <span class="btnInput btnInputIngredient">
-                        <i id="arrowIngredient" class="fa-solid fa-angle-up"></i>
+                        <span id="arrowIngredient" class="fa-solid fa-angle-up"></span>
                     </span>
                 </div>
                 <div id="wrapperInputIngredient" class="dropdown-contentInput dropdown-contentInput-ingredient inactiveBox"></div>
@@ -44,9 +46,10 @@
             <!-- Button Appareils-->
             <div class="dropdown">
                 <div class="dropdownTag">
+                    <label for="researchTagAppareils" class="labelHidden">rechercher un Appareil</label>
                     <input id="researchTagAppareils" class= "dropdownInput dropdownInputAppareils" type="text" placeholder="Appareils">
                     <span class="btnInput btnInputAppareils">
-                        <i id="arrowAppareils" class="fa-solid fa-angle-up"></i>
+                        <span id="arrowAppareils" class="fa-solid fa-angle-up"></span>
                     </span>
                 </div>
                 <div id="wrapperInputAppareils" class="dropdown-contentInput dropdown-contentInput-appareils inactiveBox"></div>
@@ -54,19 +57,19 @@
             <!-- Button ustensils-->
             <div class="dropdown">
                 <div class="dropdownTag">
+                    <label for="researchTagUstensils" class="labelHidden">rechercher un ustensil</label>
                     <input id="researchTagUstensils" class= "dropdownInput dropdownInputUstensils" type="text" placeholder="Ustensils">
                     <span class="btnInput btnInputUstensils">
-                        <i id="arrowUstensils" class="fa-solid fa-angle-up"></i>
+                        <span id="arrowUstensils" class="fa-solid fa-angle-up"></span>
                     </span>
                 </div>
                 <div id="wrapperInputUstensils" class="dropdown-contentInput dropdown-contentInput-ustensils inactiveBox"></div>
             </div>
         </div>
         <!-- Wrapper cards-->
-        <div class="wrapperCards"></div>
+        <div class="wrapperCards">
+        </div>
     </main>
-
-    
     <script type="module" src="./js/main.js"></script>
 </body>
 </html>

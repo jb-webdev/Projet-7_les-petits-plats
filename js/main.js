@@ -24,10 +24,8 @@ class Index {
 			const cardsError = `
 			<div class="cardError">
 				<p><strong>Error</strong></p>
-				<p>La recette n'existe pas !</p>
-				<p>Ou bien un ou plusieurs critère doit être modifier ou suprimé</p>
-				<p>vous pouvez rechercher par exemple : <strong>COCO</strong></p>
-				<p>le moteur vous retournera les recettes contenant le therm <strong>COCO</strong></p>
+				<p>Aucune recette ne correspond à votre critère…</p>
+				<p>vous pouvez chercher « tarte aux pommes », « poisson », etc.</p>
 			</div>
 			`
 			this.containerRecipeCards.innerHTML = cardsError
