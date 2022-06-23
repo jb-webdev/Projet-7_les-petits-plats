@@ -225,7 +225,6 @@ export class FilterTag {
             }
         }))
 
-
         // ecoute l'evenement clique pour suprimer les tag
         const closeTag = document.querySelectorAll('.fa-xmark')
         closeTag.forEach(el => el.addEventListener('click', el => {
