@@ -15,7 +15,7 @@ export class Card {
                 <div class="card-body">
                     <div class="card-body-title">
                         <h4>${this._recipe._name}</h4>
-                        <p>${this._recipe._time} <i class="fa-regular fa-clock"></i></p>
+                        <p>${this._recipe._time} <span class="fa-regular fa-clock"></span></p>
                     </div>
                     <div class="recipe">
                         <div class="recipe-ingredients">
