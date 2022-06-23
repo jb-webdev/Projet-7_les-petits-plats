@@ -43,7 +43,6 @@ class Index {
 					)
 				})
 			}, 3000)
-			
 		}
 
 		// quand la barre de recherche et que aucun tags n'est selectionner on affiche toutes les recettes
@@ -60,7 +59,7 @@ class Index {
 			// quand la barre de recherche a un therm et que aucun tags n'est selectionner on filtre le recettes par rapport a la barre de recherche seulement
 			var filtreArray = datasRecipe.filter(recipe => recipe.name.toLowerCase().includes(this.objetTagRecherche.bar ) ||
 			recipe.description.toLowerCase().includes(this.objetTagRecherche.bar) ||
-			recipe.ingredients.some(ingredient => ingredient.ingredient.includes(this.objetTagRecherche.bar)))
+			recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(this.objetTagRecherche.bar)))
 			if (filtreArray.length === 0) {
 				displayCardError()
 			} else {
@@ -78,7 +77,7 @@ class Index {
 			for ( let elementArray of this.objetTagRecherche.tags){
 				filtreArray = filtreArray.filter(recipe => recipe.name.toLowerCase().includes(elementArray) ||
 				recipe.description.toLowerCase().includes(elementArray) ||
-				recipe.ingredients.some(ingredient => ingredient.ingredient.includes(elementArray)))
+				recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(elementArray)))
 			}
 			if (filtreArray.length === 0) {
 				displayCardError()
@@ -97,14 +96,14 @@ class Index {
 			var firstResearch = datasRecipe.filter(
 				recipe => recipe.name.toLowerCase().includes(this.objetTagRecherche.bar ) ||
 				recipe.description.toLowerCase().includes(this.objetTagRecherche.bar) ||
-				recipe.ingredients.some(ingredient => ingredient.ingredient.includes(this.objetTagRecherche.bar))
+				recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(this.objetTagRecherche.bar))
 				)
 
 			var filtreArray = firstResearch
 			for ( let elementArray of this.objetTagRecherche.tags){
 				filtreArray = filtreArray.filter(recipe => recipe.name.toLowerCase().includes(elementArray) ||
 				recipe.description.toLowerCase().includes(elementArray) ||
-				recipe.ingredients.some(ingredient => ingredient.ingredient.includes(elementArray)))
+				recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(elementArray)))
 			}
 			
 			if (filtreArray.length === 0) {

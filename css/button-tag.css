@@ -51,10 +51,14 @@
     padding: 5px 8px;
     margin: 0;
 }
+.dropdown-contentInput p:focus,
 .dropdown-contentInput p:hover {
     cursor: pointer;
     color: black;
     background-color: #f1f1f1
+}
+.dropdown-contentInput p:focus{
+    outline: none;
 }
 
 /*.dropdown:hover .dropdown-contentInput{display: flex;}*/
