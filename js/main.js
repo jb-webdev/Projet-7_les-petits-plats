@@ -24,8 +24,14 @@ class Index {
 	}
 	
 	async main() {
-		const recipeData = await this.receiptsProvider.getDataReceipts()
-		this.displayReceips(recipeData)
+		// on initialise notre objet qui nous servira pour les filtres
+		this.recherche.receips = await this.receiptsProvider.getDataReceipts()
+		this.recherche.bar = 'toto'
+		this.recherche.arrayIngredient = ['tomate', 'cerise', 'banane', 'poire', 'chocolat']
+		this.recherche.arrayAppareils = ['four', 'plaques', 'cheminé']
+		this.recherche.arrayUstensils = ['cuillère', 'bol', 'saladier', 'fourchette']
+
+		this.displayReceips(this.recherche.receips)
 		
 	}
 }
