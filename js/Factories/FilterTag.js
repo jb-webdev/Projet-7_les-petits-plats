@@ -59,7 +59,7 @@ export class FilterTag {
         for (let i = 0; i < array.length; i++) {
             
             const tagElement = document.createElement('div')
-            const itemElement = document.createElement('p')
+            const itemElement = document.createElement('li')
 
             switch (expr) {
                 case 'ingredients':
@@ -67,8 +67,10 @@ export class FilterTag {
                     var idItemTransform = `item-ingredient-${compteur}`
                     tagElement.setAttribute('id', `${idTagTransform}`)
                     tagElement.setAttribute('class', `tagSelect tagSelect-ingredient`)
+
                     itemElement.setAttribute('id', `${idItemTransform}`)
-                    itemElement.setAttribute('class', 'item item-ingredient inactiveItem')
+                    itemElement.setAttribute('class', 'item item-ingredient activeItem')
+                    itemElement.setAttribute('data-value', `${array[i]}`)
                     itemElement.innerHTML = `${array[i]}`
 
                     break;
@@ -77,8 +79,10 @@ export class FilterTag {
                     var idItemTransform = `item-appareil-${compteur}`
                     tagElement.setAttribute('id', `${idTagTransform}`)
                     tagElement.setAttribute('class', `tagSelect tagSelect-appareil`)
+
                     itemElement.setAttribute('id', `${idItemTransform}`)
-                    itemElement.setAttribute('class', 'item item-appareil inactiveItem')
+                    itemElement.setAttribute('class', 'item item-appareil activeItem')
+                    itemElement.setAttribute('data-value', `${array[i]}`)
                     itemElement.innerHTML = `${array[i]}`
                     break;
                 case 'ustensils':
@@ -87,7 +91,8 @@ export class FilterTag {
                     tagElement.setAttribute('id', `${idTagTransform}`)
                     tagElement.setAttribute('class', `tagSelect tagSelect-ustensil`)
                     itemElement.setAttribute('id', `${idItemTransform}`)
-                    itemElement.setAttribute('class', 'item item-ustensil inactiveItem')
+                    itemElement.setAttribute('class', 'item item-ustensil activeItem')
+                    itemElement.setAttribute('data-value', `${array[i]}`)
                     itemElement.innerHTML = `${array[i]}`
                     break;
                 default:

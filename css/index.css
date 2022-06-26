@@ -39,7 +39,7 @@ main {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    max-width: 75%;
+    max-width: 85%;
     margin-left: auto;
     margin-right: auto;
     -webkit-box-orient: vertical;
@@ -53,33 +53,45 @@ main {
 
 .formReseach {
     width: 100%;
+    height: 50px;
     position: relative;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    margin-bottom: 20px;
 }
 
 #inputResearch {
     width: 100%;
+    height: 100%;
     border: 3px solid var(--bg-secondary);
     background: var(--bg-secondary);
     border-right: none;
+    color: #ffffff;
+    font-size: 20px;
     padding: 5px;
-    height: 20px;
     border-radius: 5px 0 0 5px;
     outline: none;
 }
 
 .btnFormResearch {
+    /* width: 40px;
+   height: 36px;
+   */
     width: 40px;
-    height: 36px;
+    height: 66px;
+
     border: 1px solid var(--bg-secondary);
     background: var(--bg-secondary);
     text-align: center;
     color: #eeeeee;
     border-radius: 0 5px 5px 0;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 25px;
+}
+
+.btnFormResearch:hover {
+    background-color: #9d9898;
 }
 
 
@@ -91,4 +103,4 @@ main {
     position: absolute;
     top: -10000px;
     width: 1px;
- }
+}

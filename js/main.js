@@ -71,7 +71,8 @@ class Index {
 		 * 		stocker le resultat dans this.arrayFilterRecherche
 		 * 		voir comment gerer la recherche par tag
 		 * 
-		 * 		voir si pour les items si une liste ul n'est preferable
+		 * 		verifier les items si les liste ul mise en place fonctionne bien
+		 * 		ecouter l'evenement pour l'ouverture des bouttons filtre tag
 		 */
 
 

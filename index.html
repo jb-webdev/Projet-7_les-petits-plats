@@ -37,11 +37,15 @@
                 <div class="dropdownTag">
                     <label for="researchTagIngredient" class="labelHidden" >rechercher un ingrédient</label>
                     <input id="researchTagIngredient" class= "dropdownInput dropdownInputIngredient" type="text" placeholder="Ingredient">
-                    <span class="btnInput btnInputIngredient">
+                    <button class="btnInput btnInputIngredient" type="button">
                         <span id="arrowIngredient" class="fa-solid fa-angle-up"></span>
-                    </span>
+                    </button>
                 </div>
-                <div id="wrapperInputIngredient" class="dropdown-contentInput dropdown-contentInput-ingredient inactiveBox"></div>
+                <div id="wrapperInputIngredient" class="dropdown-contentInput dropdown-contentInput-ingredient inactiveBox">
+                    <ul id="wrapperInputIngredient-ul" class="ul-ingredient">
+                        <!-- <li class="item item-ingredient activeItem" data-value='chocolat'>chocolat</li> -->
+                    </ul>
+                </div>
             </div>
             <!-- Button Appareils-->
             <div class="dropdown">
@@ -52,7 +56,9 @@
                         <span id="arrowAppareils" class="fa-solid fa-angle-up"></span>
                     </span>
                 </div>
-                <div id="wrapperInputAppareils" class="dropdown-contentInput dropdown-contentInput-appareils inactiveBox"></div>
+                <div id="wrapperInputAppareils" class="dropdown-contentInput dropdown-contentInput-appareils inactiveBox">
+                    <ul id="wrapperInputAppareil-ul" class="ul-appareil"></ul>
+                </div>
             </div>
             <!-- Button ustensils-->
             <div class="dropdown">
@@ -63,7 +69,9 @@
                         <span id="arrowUstensils" class="fa-solid fa-angle-up"></span>
                     </span>
                 </div>
-                <div id="wrapperInputUstensils" class="dropdown-contentInput dropdown-contentInput-ustensils inactiveBox"></div>
+                <div id="wrapperInputUstensils" class="dropdown-contentInput dropdown-contentInput-ustensils inactiveBox">
+                    <ul id="wrapperInputUstensil-ul" class="ul-ustensil"></ul>
+                </div>
             </div>
         </div>
         <!-- Wrapper cards-->
