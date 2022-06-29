@@ -69,6 +69,7 @@ const createElementTag = (arrayTag, classTag) => {
     
     for (let i = 0; i < arrayTag.length; i++) {
         var tagElement = document.createElement('div')
+        tagElement.setAttribute('data-value', `${arrayTag[i]}`)
         switch (classTag) {
             case 'ingredient':
                 tagElement.setAttribute('class', 'tagSelect tagSelect-ingredient')
@@ -89,26 +90,30 @@ const createElementTag = (arrayTag, classTag) => {
     }
 }
 
+const closeBtn = (value,) => {
+    var wrapperInputAppareils = document.getElementById(`wrapperInput${value}`)
+    var researchInput = document.getElementById(`researchTag${value}`)
+    wrapperInputAppareils.classList.remove('activeBox')
+    researchInput.classList.remove('openDropdownInput')
+}
+
+const openBtn = (value,) => {
+    var wrapperInputAppareils = document.getElementById(`wrapperInput${value}`)
+    var researchInput = document.getElementById(`researchTag${value}`)
+    wrapperInputAppareils.classList.toggle('activeBox')
+    researchInput.classList.toggle('openDropdownInput')
+}
+
 const openDropDown = () => {
     var arrowUp = document.querySelectorAll(".fa-angle-up")
-    var allItems = document.querySelectorAll('.item')
-
     arrowUp.forEach(el => el.addEventListener('click', el => {
         var idTarget = el.target.id
-        var transformId = idTarget.replace('arrow', 'wrapperInput')
-        var wrapperInputAppareils = document.getElementById(transformId)
-        wrapperInputAppareils.classList.toggle('activeBox')
-        wrapperInputAppareils.classList.toggle('openDropdownInput')
+        var replaceValueTarget = idTarget.replace('arrow', '')
+        openBtn(replaceValueTarget)
     }))
-
-    allItems.forEach(el => el.addEventListener('click', el => {
-        console.log(el.target.textContent)
-    }))
-}
-// ===== EVENT CLOSE TAG =====
-const closeTag = () => {
-    const allCloseTag = document.querySelectorAll('.fa-xmark')
+    
 }
 
-export { createElementTag, createItemList, itemsBtnIngredient, itemsBtnAppareils, itemsBtnUstensils, openDropDown}
+
+export { createElementTag, createItemList, itemsBtnIngredient, itemsBtnAppareils, itemsBtnUstensils, openDropDown, openBtn, closeBtn}
 

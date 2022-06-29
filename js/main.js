@@ -2,8 +2,8 @@ import { ReceiptsProvider } from './provider/provider.js'
 
 import { Card } from './Factories/Card.js'
 import { Recipe } from './models/Recipe.js'
-import { researchBar } from './utils/filterFunction.js'
-import { createElementTag, createItemList, itemsBtnIngredient, itemsBtnAppareils, itemsBtnUstensils, openDropDown} from './utils/itemsFunction.js'
+import { researchBar, researchTag } from './utils/filterFunction.js'
+import { createElementTag, createItemList, itemsBtnIngredient, itemsBtnAppareils, itemsBtnUstensils, openDropDown, openBtn, closeBtn} from './utils/itemsFunction.js'
 
 class Index {
 	constructor() {
@@ -38,6 +38,7 @@ class Index {
 		this.containerRecipeCards.innerHTML = ''
 		// on creer un tableau vide
 		var datasDisplay = researchBar(datasDisplay, this.arrayFilterRecherche, this.objetTagRecherche.bar)
+		var datasDisplay = researchTag(datasDisplay, this.objetTagRecherche.tags)
 
 
 		// j'hydrate le tableau pour les items  par rapport au filtre
@@ -83,14 +84,28 @@ class Index {
 
 		// On ecoute l'evenement pour l'ouverture des inputs Tag
 		openDropDown()
-		
 
+		const itemsEvent = document.querySelectorAll('.item')
+		itemsEvent.forEach(el => el.addEventListener('click', el => {
+			this.objetTagRecherche.tags.push(el.target.textContent)
+			console.log(el.target)
+			var targetIdClose = el.target.classList[1]
+			var elements = document.querySelector(`div[data-value=${el.target.textContent}]`)
+			elements.classList.toggle('activeTag')
+			closeBtn(targetIdClose[0].toUpperCase() + targetIdClose.slice(1))
+			this.displayReceips()
+		}))
 		
-		
-		
-		
-		
-		
+		const closeTagEvent = document.querySelectorAll('.fa-xmark')
+		closeTagEvent.forEach(el => el.addEventListener('click', el => {
+			var changeId = el.target.id.replace('close-', '')
+			var elements = document.querySelector(`div[data-value=${changeId}]`)
+			elements.classList.remove('activeTag')
+			this.objetTagRecherche.tags.splice(this.objetTagRecherche.tags.indexOf(changeId), 1)
+			console.log(this.objetTagRecherche.tags)
+			this.displayReceips()
+		}))
+
 		// On écoute l'evenenment dans la barre de recherche
 		this.eventResearchBar.addEventListener('input', e => {
 			var valueInput = e.target.value

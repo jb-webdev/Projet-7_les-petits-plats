@@ -17,18 +17,15 @@ const researchBar = (dataDisplay, arrayFilterRecherche, arrayRechercheBar) => {
 
 const researchTag = (dataDisplay, arrayRechercheTag) => {
     if (arrayRechercheTag.length === 0) {
-        return console.log('le tableau est vide')
+        return dataDisplay
     } else if (arrayRechercheTag.length != 0) {
-/*
-        for (let elementTag of this.objetTagRecherche.tags) {
-            var filterTagElement = datasDisplay.filter(recipe => recipe.appliance.toLowerCase().includes(elementTag) ||
+        for (let elementTag of arrayRechercheTag) {
+            var filterTagElement = dataDisplay.filter(recipe => recipe.appliance.toLowerCase().includes(elementTag) ||
                 recipe.ustensils.some(el => el.toLowerCase().includes(elementTag)) ||
                 recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(elementTag)))
-            datasDisplay = filterTagElement
-            this.arrayFilterRechercheItems = datasDisplay
+                dataDisplay = filterTagElement
         }
-*/
-        return console.log('On doit faire la recherche par Tag')
+        return dataDisplay
     }
 
 }

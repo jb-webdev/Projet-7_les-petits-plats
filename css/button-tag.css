@@ -166,15 +166,19 @@
     background-color: var(--color-green);
 }
 
-
+.fa-angle-down,
+.fa-angle-up {
+    cursor: pointer;
+}
 
 .activeBox,
 .activeItem {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    width: 600px;
 }
 
 .openDropdownInput {
-    width: 600px;
+    width: 559px;
 }
