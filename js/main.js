@@ -1,80 +1,104 @@
-import { FilterTag } from './Factories/FilterTag.js'
 import { ReceiptsProvider } from './provider/provider.js'
 
 import { Card } from './Factories/Card.js'
 import { Recipe } from './models/Recipe.js'
+import { researchBar } from './utils/filterFunction.js'
+import { createElementTag, createItemList, itemsBtnIngredient, itemsBtnAppareils, itemsBtnUstensils, openDropDown} from './utils/itemsFunction.js'
 
 class Index {
 	constructor() {
 		this.receiptsProvider = new ReceiptsProvider('../data/recipes.json')
 		this.containerRecipeCards = document.querySelector('.wrapperCards')
+		this.eventResearchBar = document.getElementById('inputResearch')
+		this.wrapperTag = document.getElementById('wrapperTag')
+
 		this.recipeData = []
 		this.arrayFilterRecherche = []
-		this.eventResearchBar = document.getElementById('inputResearch')
+		this.arrayFilterRechercheItems = []
+		this.arrayFilterItemsIngredient = []
+		this.arrayFilterItemsAppareils = []
+		this.arrayFilterItemsUstensils = []
 		this.objetTagRecherche = new Object()
 	}
-
-	/** Fonction pour l'affichage de la carte Error avec redirection */
-	
-	/**
-	 * filtre les recettes selon le choix de l'utilisateur
-	 * @param {*Array} datasRecipe
-	 */
-	displayReceips() {
-		this.containerRecipeCards.innerHTML = ''
-		this.arrayFilterRecherche
-			.map(recipe => new Recipe(recipe))
-			.forEach(recipe => {
-				const Factories = new Card(recipe)
-				this.containerRecipeCards.appendChild(
-					Factories.createRecipeCard()
-				)
-			})
+	// au lancement du script j''initialise les objet dont j'aurai besoin
+	initObjectForResearch = () => {
+		this.arrayFilterRecherche = this.recipeData
+		// Je gere mon objet pour les Tags / La recherche dans la barre / les tags
+		this.objetTagRecherche.bar = ''
+		this.objetTagRecherche.tags = []
+		// j'initialise mar barre de rcherche a zéro au rechargememtn de ma page
+		this.eventResearchBar.value = ''
 	}
 
-	algoFilter() {
-		if (this.objetTagRecherche.bar != '') {
-			this.arrayFilterRecherche = this.arrayFilterRecherche.filter(recipe => recipe.name.toLowerCase().includes(this.objetTagRecherche.bar) ||
-				recipe.description.toLowerCase().includes(this.objetTagRecherche.bar) ||
-				recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(this.objetTagRecherche.bar)))
-		}
+	/**
+	 * filtre les recettes selon le choix de l'utilisateur
+	 */
+	displayReceips() {
+		// on initialise le html du container
+		this.containerRecipeCards.innerHTML = ''
+		// on creer un tableau vide
+		var datasDisplay = researchBar(datasDisplay, this.arrayFilterRecherche, this.objetTagRecherche.bar)
 
-		this.displayReceips()
+
+		// j'hydrate le tableau pour les items  par rapport au filtre
+		this.arrayFilterRechercheItems = datasDisplay
+
+		
+		// j'affiche le result de la recherche
+		if (this.arrayFilterRechercheItems.length === 0){
+			this.containerRecipeCards.innerHTML = 'Aucune recette ne correspond à votre critère... Vous pouvez chercher  « tarte aux pommes », « poisson », etc.'
+
+		} else if (this.arrayFilterRechercheItems.length > 0){
+			datasDisplay
+				.map(recipe => new Recipe(recipe))
+				.forEach(recipe => {
+					const Factories = new Card(recipe)
+					this.containerRecipeCards.appendChild(
+						Factories.createRecipeCard()
+					)
+				})
+		}
 	}
 
 
 	async main() {
+		// Je recuperer les datas provenant de la BDD
 		this.recipeData = await this.receiptsProvider.getDataReceipts()
-		this.arrayFilterRecherche = this.recipeData
-
-		this.objetTagRecherche.bar = ''
-		this.objetTagRecherche.tags = []
-
-		const ClassTagFilter = new FilterTag(this.arrayFilterRecherche)
-		// on initialise nos tags et nos item selon notre base de données fourni
-		ClassTagFilter.initTagAndItem()
-
+		this.initObjectForResearch()
 		// on lance le premier affichage de toute les recettes
 		this.displayReceips()
-		// j'ecoute l'evenement dans mon input pour la recherche de recette
+		
+		// On hydrate nos tableau de recherche ingredients / appareils / ustensils
+		this.arrayFilterItemsIngredient = itemsBtnIngredient(this.arrayFilterRecherche)
+		this.arrayFilterItemsAppareils = itemsBtnAppareils(this.arrayFilterRecherche)
+		this.arrayFilterItemsUstensils = itemsBtnUstensils(this.arrayFilterRecherche)
+		// on créer nos liste en display none
+		createItemList(this.arrayFilterItemsIngredient, 'wrapperInputIngredient-ul', 'ingredient')
+		createItemList(this.arrayFilterItemsAppareils, 'wrapperInputAppareil-ul', 'appareil')
+		createItemList(this.arrayFilterItemsUstensils, 'wrapperInputUstensil-ul', 'ustensil')
+		// on créer tous nos tags en display none
+		createElementTag(this.arrayFilterItemsIngredient, 'ingredient')
+		createElementTag(this.arrayFilterItemsAppareils, 'appareils')
+		createElementTag(this.arrayFilterItemsUstensils, 'ustensils')
+
+		// On ecoute l'evenement pour l'ouverture des inputs Tag
+		openDropDown()
+		
+
+		
+		
+		
+		
+		
+		
+		// On écoute l'evenenment dans la barre de recherche
 		this.eventResearchBar.addEventListener('input', e => {
 			var valueInput = e.target.value
 			if (valueInput.length > 2) {
 				this.objetTagRecherche.bar = e.target.value
-				this.algoFilter()
 			}
+			this.displayReceips()
 		})
-
-		/** TODO List
-		 * 	BUG sur le resultat de recherche à gerer en priorité
-		 * 
-		 * 		stocker le resultat dans this.arrayFilterRecherche
-		 * 		voir comment gerer la recherche par tag
-		 * 
-		 * 		verifier les items si les liste ul mise en place fonctionne bien
-		 * 		ecouter l'evenement pour l'ouverture des bouttons filtre tag
-		 */
-
 
 	}
 }

@@ -11,7 +11,7 @@
     flex-wrap: wrap;
     margin-top: 10px;
     margin-bottom: 10px;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
 .dropdown {
@@ -78,15 +78,11 @@
     }
 }
 .dropdown-contentInput {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
+    display: none;
     flex-direction: column;
-    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     position: absolute;
     padding-bottom: 10px;
-    -webkit-box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
     overflow: scroll;
@@ -106,21 +102,22 @@
     flex-wrap: wrap;
     max-height: 500px;
 }
-.dropdown-contentInput li {
+.item {
     font-size: 18px;
     color: #ffffff;
     padding: 5px 8px;
     margin: 0;
+    list-style: none;
 }
 
-.dropdown-contentInput li:focus,
-.dropdown-contentInput li:hover {
+.item:focus,
+.item:hover {
     cursor: pointer;
     color: black;
     background-color: #f1f1f1
 }
 
-.dropdown-contentInput li:focus {
+.item:focus {
     outline: none;
 }
 
@@ -139,7 +136,6 @@
 
 .dropdown-contentInput-ingredient {
     background-color: var(--color-Blue);
-   
 }
 
 /* Button Appareils */
@@ -153,9 +149,6 @@
 }
 
 .dropdown-contentInput-appareils {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
     background-color: var(--color-red);
 }
 
@@ -174,13 +167,6 @@
 }
 
 
-
-
-
-.inactiveBox,
-.inactiveItem {
-    display: none
-}
 
 .activeBox,
 .activeItem {

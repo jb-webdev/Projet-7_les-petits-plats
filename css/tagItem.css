@@ -37,12 +37,6 @@
     margin-bottom: 10px;
 }
 
-.activeTag {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-}
-
 .closetag {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -90,4 +84,10 @@
 
 .tagSelect-ustensil {
     background-color: var(--color-green);
+}
+
+.activeTag {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
 }
