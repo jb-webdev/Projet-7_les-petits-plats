@@ -20,15 +20,6 @@ class Index {
 		this.arrayFilterItemsUstensils = []
 		this.objetTagRecherche = new Object()
 	}
-	// au lancement du script j''initialise les objet dont j'aurai besoin
-	initObjectForResearch = () => {
-		this.arrayFilterRecherche = this.recipeData
-		// Je gere mon objet pour les Tags / La recherche dans la barre / les tags
-		this.objetTagRecherche.bar = ''
-		this.objetTagRecherche.tags = []
-		// j'initialise mar barre de rcherche a zéro au rechargememtn de ma page
-		this.eventResearchBar.value = ''
-	}
 	
 	/**
 	 * filtre les recettes selon le choix de l'utilisateur
@@ -62,11 +53,15 @@ class Index {
 		openDropDown(this.arrayFilterRechercheItems, this.objetTagRecherche.tags)
 	}
 
-
 	async main() {
 		// Je recuperer les datas provenant de la BDD
 		this.recipeData = await this.receiptsProvider.getDataReceipts()
-		this.initObjectForResearch()
+		this.arrayFilterRecherche = this.recipeData
+		// Je gere mon objet pour les Tags / La recherche dans la barre / les tags
+		this.objetTagRecherche.bar = ''
+		this.objetTagRecherche.tags = []
+		// j'initialise mar barre de rcherche a zéro au rechargememtn de ma page
+		this.eventResearchBar.value = ''
 		// on lance le premier affichage de toute les recettes
 		this.displayReceips()
 

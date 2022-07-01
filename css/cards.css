@@ -63,6 +63,7 @@
     align-items: flex-start;
     padding: 10px;
     min-height: 250px;
+    background-color: var(--bg-primary);
 }
 
 .card-body-title {
