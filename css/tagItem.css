@@ -65,22 +65,22 @@
     color: #ffffff;
 }
 
-.tagSelect-ingredient,
-.tagSelect-appareil,
-.tagSelect-ustensil {
+.tagSelect-ingredients,
+.tagSelect-appareils,
+.tagSelect-ustensils {
     margin-left: 10px;
     margin-right: 10px;
 }
 
-.tagSelect-ingredient {
+.tagSelect-ingredients {
     background-color: var(--color-Blue);
 }
 
-.tagSelect-appareil {
+.tagSelect-appareils {
     background-color: var(--color-red);
 }
 
-.tagSelect-ustensil {
+.tagSelect-ustensils {
     background-color: var(--color-green);
 }
 

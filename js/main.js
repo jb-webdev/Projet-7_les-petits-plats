@@ -3,7 +3,7 @@ import { ReceiptsProvider } from './provider/provider.js'
 import { Card } from './Factories/Card.js'
 import { Recipe } from './models/Recipe.js'
 import { researchBar, researchTag } from './utils/filterFunction.js'
-import { createElementTag, createItemList, itemsBtnIngredient, itemsBtnAppareils, itemsBtnUstensils, openDropDown, openBtn, closeBtn} from './utils/itemsFunction.js'
+import { openDropDown } from './utils/itemsFunction.js'
 
 class Index {
 	constructor() {
@@ -29,7 +29,7 @@ class Index {
 		// j'initialise mar barre de rcherche a zéro au rechargememtn de ma page
 		this.eventResearchBar.value = ''
 	}
-
+	
 	/**
 	 * filtre les recettes selon le choix de l'utilisateur
 	 */
@@ -44,12 +44,12 @@ class Index {
 		// j'hydrate le tableau pour les items  par rapport au filtre
 		this.arrayFilterRechercheItems = datasDisplay
 
-		
+
 		// j'affiche le result de la recherche
-		if (this.arrayFilterRechercheItems.length === 0){
+		if (datasDisplay.leng === 0) {
 			this.containerRecipeCards.innerHTML = 'Aucune recette ne correspond à votre critère... Vous pouvez chercher  « tarte aux pommes », « poisson », etc.'
 
-		} else if (this.arrayFilterRechercheItems.length > 0){
+		} else if (datasDisplay.length > 0) {
 			datasDisplay
 				.map(recipe => new Recipe(recipe))
 				.forEach(recipe => {
@@ -59,6 +59,7 @@ class Index {
 					)
 				})
 		}
+		openDropDown(this.arrayFilterRechercheItems, this.objetTagRecherche.tags)
 	}
 
 
@@ -68,45 +69,7 @@ class Index {
 		this.initObjectForResearch()
 		// on lance le premier affichage de toute les recettes
 		this.displayReceips()
-		
-		// On hydrate nos tableau de recherche ingredients / appareils / ustensils
-		this.arrayFilterItemsIngredient = itemsBtnIngredient(this.arrayFilterRecherche)
-		this.arrayFilterItemsAppareils = itemsBtnAppareils(this.arrayFilterRecherche)
-		this.arrayFilterItemsUstensils = itemsBtnUstensils(this.arrayFilterRecherche)
-		// on créer nos liste en display none
-		createItemList(this.arrayFilterItemsIngredient, 'wrapperInputIngredient-ul', 'ingredient')
-		createItemList(this.arrayFilterItemsAppareils, 'wrapperInputAppareil-ul', 'appareil')
-		createItemList(this.arrayFilterItemsUstensils, 'wrapperInputUstensil-ul', 'ustensil')
-		// on créer tous nos tags en display none
-		createElementTag(this.arrayFilterItemsIngredient, 'ingredient')
-		createElementTag(this.arrayFilterItemsAppareils, 'appareils')
-		createElementTag(this.arrayFilterItemsUstensils, 'ustensils')
 
-		// On ecoute l'evenement pour l'ouverture des inputs Tag
-		openDropDown()
-
-		const itemsEvent = document.querySelectorAll('.item')
-		itemsEvent.forEach(el => el.addEventListener('click', el => {
-			this.objetTagRecherche.tags.push(el.target.textContent)
-			console.log(el.target)
-			var targetIdClose = el.target.classList[1]
-			var elements = document.querySelector(`div[data-value=${el.target.textContent}]`)
-			elements.classList.toggle('activeTag')
-			closeBtn(targetIdClose[0].toUpperCase() + targetIdClose.slice(1))
-			this.displayReceips()
-		}))
-		
-		const closeTagEvent = document.querySelectorAll('.fa-xmark')
-		closeTagEvent.forEach(el => el.addEventListener('click', el => {
-			var changeId = el.target.id.replace('close-', '')
-			var elements = document.querySelector(`div[data-value=${changeId}]`)
-			elements.classList.remove('activeTag')
-			this.objetTagRecherche.tags.splice(this.objetTagRecherche.tags.indexOf(changeId), 1)
-			console.log(this.objetTagRecherche.tags)
-			this.displayReceips()
-		}))
-
-		// On écoute l'evenenment dans la barre de recherche
 		this.eventResearchBar.addEventListener('input', e => {
 			var valueInput = e.target.value
 			if (valueInput.length > 2) {
@@ -114,7 +77,6 @@ class Index {
 			}
 			this.displayReceips()
 		})
-
 	}
 }
 
