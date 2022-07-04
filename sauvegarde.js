@@ -81,7 +81,8 @@ const itemsBtnUstensils = (arrayItems) => {
 
 }
 // ===== BTN INPUT TAGS RECHERCHE pour INGREDIENT / APPAREILS / USTENSILS =====
-// creation des items dans les inputs de recherche par tags
+// creation des items dans les inputs de recherceh par tags
+
 const createItemList = (arrayElement, WrapperInput, ClassItem) => {
     //createItemList(this.arrayFilterItemsIngredient, 'wrapperInputIngredient-ul', 'ingredient')
     const wrapperInput = document.getElementById(WrapperInput)
@@ -95,49 +96,34 @@ const createItemList = (arrayElement, WrapperInput, ClassItem) => {
         wrapperInput.appendChild(itemCreate)
     }
 }
-
 // ===== CREATION DES TAGS  =====
 const createElementTag = (arrayTag, classTag) => {
     const wrapperTag = document.getElementById('wrapperTag')
     
     for (let i = 0; i < arrayTag.length; i++) {
         var tagElement = document.createElement('div')
-        var classTagElement = ''
         var ModifyStringForDataValueElement = accentsModifyDeleteSpace(arrayTag[i])
         tagElement.setAttribute('data-value', `${ModifyStringForDataValueElement}`)
         switch (classTag) {
             case 'ingredients':
                 tagElement.setAttribute('class', 'tagSelect tagSelect-ingredients')
-                classTagElement = ' closetagIngredients'
                 break
             case 'appareils':
                 tagElement.setAttribute('class', 'tagSelect tagSelect-appareils')
-                classTagElement = ' closetagAppareils'
                 break
             case 'ustensils':
                 tagElement.setAttribute('class', 'tagSelect tagSelect-ustensils')
-                classTagElement = ' closetagUstensils'
                 break
         }
         const htmlContentTag = `
             <p class="textTag">${arrayTag[i]}</p>
-            <span class='closetag ${classTagElement}'><span id=close-${ModifyStringForDataValueElement} class="fa-solid fa-xmark"></span></span>
+            <span class="closetag"><span id=close-${ModifyStringForDataValueElement} class="fa-solid fa-xmark"></span></span>
         `
         tagElement.innerHTML = htmlContentTag
         wrapperTag.appendChild(tagElement)
     }
 }
-const openBtn = (value) => {
-    var wrapperInputAppareils = document.getElementById(`wrapperInput${value}`)
-    var researchInput = document.getElementById(`researchTag${value}`)
-    wrapperInputAppareils.classList.toggle('activeBox')
-    researchInput.classList.toggle('openDropdownInput')
-    
-}
-
-
-
-const closeBtn = (value) => {
+const closeBtn = (value,) => {
     var wrapperInputAppareils = document.getElementById(`wrapperInput${value}`)
     console.log(`wrapperInput${value}`)
     var researchInput = document.getElementById(`researchTag${value}`)
@@ -145,13 +131,24 @@ const closeBtn = (value) => {
     wrapperInputAppareils.classList.remove('activeBox')
     researchInput.classList.remove('openDropdownInput')
 }
-export { 
-    accentsModifyDeleteSpace,
-    createElementTag, 
-    createItemList, 
-    itemsBtnIngredient, 
-    itemsBtnAppareils, 
-    itemsBtnUstensils,
-    openBtn, 
-    closeBtn}
+const openBtn = (value) => {
+    var wrapperInputAppareils = document.getElementById(`wrapperInput${value}`)
+    var researchInput = document.getElementById(`researchTag${value}`)
+    wrapperInputAppareils.classList.toggle('activeBox')
+    researchInput.classList.toggle('openDropdownInput')
 
+}
+const openDropDown = (datasDisplay) => {
+    var arrowUp = document.querySelectorAll(".fa-angle-up")
+    arrowUp.forEach(el => el.addEventListener('click', el => {
+        var idTarget = el.target.id
+        var replaceValueTarget = idTarget.replace('arrow', '')
+        openBtn(replaceValueTarget)
+        createItemList(itemsBtnIngredient(datasDisplay), 'wrapperInputIngredients-ul', 'ingredients')
+		createItemList(itemsBtnAppareils(datasDisplay), 'wrapperInputAppareils-ul', 'appareils')
+		createItemList(itemsBtnUstensils(datasDisplay), 'wrapperInputUstensils-ul', 'ustensils')
+        createElementTag(itemsBtnIngredient(datasDisplay), 'ingredients')
+		createElementTag(itemsBtnAppareils(datasDisplay), 'appareils')
+		createElementTag(itemsBtnUstensils(datasDisplay), 'ustensils')
+    }))
+}

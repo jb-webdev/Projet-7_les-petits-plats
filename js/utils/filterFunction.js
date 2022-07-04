@@ -4,31 +4,56 @@
  * @param {*} arrayFilterRecherche = this.arrayFilterRecherche
  * @param {*} arrayRechercheBar = this.objetTagRecherche.bar
  */
-const researchBar = (dataDisplay, arrayFilterRecherche, arrayRechercheBar) => {
+const researchBar = (arrayFilterRecherche, arrayRechercheBar) => {
     if (arrayRechercheBar === ''){
-        return dataDisplay = arrayFilterRecherche
+        return arrayFilterRecherche
     } else if (arrayRechercheBar != ''){
-        return dataDisplay = arrayFilterRecherche.filter(recipe => 
+        var dataFilter = arrayFilterRecherche.filter(recipe => 
             recipe.name.toLowerCase().includes(arrayRechercheBar) ||
             recipe.description.toLowerCase().includes(arrayRechercheBar) ||
             recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(arrayRechercheBar)))
+        return dataFilter
     }
 }
 
-const researchTag = (dataDisplay, arrayRechercheTag) => {
+const researchTagIngredient = (dataDisplay, arrayRechercheTag) => {
     if (arrayRechercheTag.length === 0) {
         return dataDisplay
     } else if (arrayRechercheTag.length != 0) {
+        let filterTagElement = dataDisplay
         for (let elementTag of arrayRechercheTag) {
-            var filterTagElement = dataDisplay.filter(recipe => recipe.appliance.toLowerCase().includes(elementTag) ||
-                recipe.ustensils.some(el => el.toLowerCase().includes(elementTag)) ||
-                recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(elementTag)))
-                dataDisplay = filterTagElement
+            filterTagElement = filterTagElement.filter(recipe => recipe.ingredients.some(
+                ingredient => ingredient.ingredient.toLowerCase().includes(elementTag)))
         }
-        return dataDisplay
+        // faire trois filtre un pour chaque bouttons
+        return filterTagElement
     }
-
+}
+const researchTagAppareils = (dataDisplay, arrayRechercheTag) => {
+    if (arrayRechercheTag.length === 0) {
+        return dataDisplay
+    } else if (arrayRechercheTag.length != 0) {
+        let filterTagElement = dataDisplay
+        for (let elementTag of arrayRechercheTag) {
+            filterTagElement = filterTagElement.filter(recipe => recipe.description.toLowerCase().includes(elementTag))
+        }
+        // faire trois filtre un pour chaque bouttons
+        return filterTagElement
+    }
+}
+const researchTagUstensils = (dataDisplay, arrayRechercheTag) => {
+    if (arrayRechercheTag.length === 0) {
+        return dataDisplay
+    } else if (arrayRechercheTag.length != 0) {
+        let filterTagElement = dataDisplay
+        for (let elementTag of arrayRechercheTag) {
+            filterTagElement = filterTagElement.filter(recipe => recipe.ustensils.some(
+                ingredient => ingredient.ustensils.toLowerCase().includes(elementTag)))
+        }
+        // faire trois filtre un pour chaque bouttons
+        return filterTagElement
+    }
 }
 
 
-export { researchBar, researchTag }
+export { researchBar, researchTagUstensils, researchTagAppareils, researchTagIngredient }
