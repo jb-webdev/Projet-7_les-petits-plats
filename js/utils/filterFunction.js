@@ -35,7 +35,7 @@ const researchTagAppareils = (dataDisplay, arrayRechercheTag) => {
     } else if (arrayRechercheTag.length != 0) {
         let filterTagElement = dataDisplay
         for (let elementTag of arrayRechercheTag) {
-            filterTagElement = filterTagElement.filter(recipe => recipe.description.toLowerCase().includes(elementTag))
+            filterTagElement = filterTagElement.filter(recipe => recipe.appliance.toLowerCase().includes(elementTag))
         }
         // faire trois filtre un pour chaque bouttons
         return filterTagElement
@@ -48,7 +48,7 @@ const researchTagUstensils = (dataDisplay, arrayRechercheTag) => {
         let filterTagElement = dataDisplay
         for (let elementTag of arrayRechercheTag) {
             filterTagElement = filterTagElement.filter(recipe => recipe.ustensils.some(
-                ingredient => ingredient.ustensils.toLowerCase().includes(elementTag)))
+                ustensils => ustensils.ustensil.toLowerCase().includes(elementTag)))
         }
         // faire trois filtre un pour chaque bouttons
         return filterTagElement

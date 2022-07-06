@@ -89,13 +89,59 @@ const createItemList = (arrayElement, WrapperInput, ClassItem) => {
     for (let i = 0; i < arrayElement.length; i++) {
         var ModifyStringForDataValueElement = accentsModifyDeleteSpace(arrayElement[i])
         var itemCreate = document.createElement('li')
-        itemCreate.setAttribute('class', `item ${ClassItem}`)
+        switch (ClassItem) {
+            case 'ingredients':
+                itemCreate.setAttribute('id', `itemlistIngredients-${ModifyStringForDataValueElement}`)
+                break
+            case 'appareils':
+                itemCreate.setAttribute('id', `itemlistAppareils-${ModifyStringForDataValueElement}`)
+                break
+            case 'ustensils':
+                itemCreate.setAttribute('id', `itemlistUstensils-${ModifyStringForDataValueElement}`)
+                break
+        }itemCreate.setAttribute('class', `item ${ClassItem} activeItem`)
         itemCreate.setAttribute('data-List', `${ModifyStringForDataValueElement}`)
         itemCreate.innerHTML = `${arrayElement[i]}`
         wrapperInput.appendChild(itemCreate)
     }
 }
 
+const displayItemList = (datasIngredient, datatAppareils, datasUstensils, stateElements) => {
+    for (let i = 0; i < datasIngredient.length; i++){
+        var elementsIngredients = document.getElementById(`itemlistIngredients-${accentsModifyDeleteSpace(datasIngredient[i])}`)
+        switch (stateElements) {
+            case 'on':
+                elementsIngredients.classList.toggle('activeItem')
+                break
+            case 'off':
+                elementsIngredients.classList.remove('activeItem')
+                break
+        }
+    }
+    for (let i = 0; i < datatAppareils.length; i++){
+        var elementsAppareils = document.getElementById(`itemlistAppareils-${accentsModifyDeleteSpace(datatAppareils[i])}`)
+        switch (stateElements) {
+            case 'on':
+                elementsAppareils.classList.toggle('activeItem')
+                break
+            case 'off':
+                elementsAppareils.classList.remove('activeItem')
+                break
+        }
+    }
+
+    for (let i = 0; i < datasUstensils.length; i++){
+        var elementsUstnsils = document.getElementById(`itemlistUstensils-${accentsModifyDeleteSpace(datasUstensils[i])}`)
+        switch (stateElements) {
+            case 'on':
+                elementsUstnsils.classList.toggle('activeItem')
+                break
+            case 'off':
+                elementsUstnsils.classList.remove('activeItem')
+                break
+        }
+    }
+}
 // ===== CREATION DES TAGS  =====
 const createElementTag = (arrayTag, classTag) => {
     const wrapperTag = document.getElementById('wrapperTag')
@@ -132,18 +178,24 @@ const openBtn = (value) => {
     var researchInput = document.getElementById(`researchTag${value}`)
     wrapperInputAppareils.classList.toggle('activeBox')
     researchInput.classList.toggle('openDropdownInput')
-    
 }
-
-
-
 const closeBtn = (value) => {
     var wrapperInputAppareils = document.getElementById(`wrapperInput${value}`)
-    console.log(`wrapperInput${value}`)
     var researchInput = document.getElementById(`researchTag${value}`)
-    console.log(`researchTag${value}`)
+    researchInput.value = ''
     wrapperInputAppareils.classList.remove('activeBox')
     researchInput.classList.remove('openDropdownInput')
+}
+
+const initTagsAndItems = (datasArray) => {
+    // On creer tous les tags en display none
+createElementTag(itemsBtnIngredient(datasArray), 'ingredients')
+createElementTag(itemsBtnAppareils(datasArray), 'appareils')
+createElementTag(itemsBtnUstensils(datasArray), 'ustensils')
+// On creer tous les items pour la recherche par tags
+createItemList(itemsBtnIngredient(datasArray), 'wrapperInputIngredients-ul', 'ingredients')
+createItemList(itemsBtnAppareils(datasArray), 'wrapperInputAppareils-ul', 'appareils')
+createItemList(itemsBtnUstensils(datasArray), 'wrapperInputUstensils-ul', 'ustensils')
 }
 export { 
     accentsModifyDeleteSpace,
@@ -153,5 +205,8 @@ export {
     itemsBtnAppareils, 
     itemsBtnUstensils,
     openBtn, 
-    closeBtn}
+    closeBtn,
+    displayItemList,
+    initTagsAndItems
+}
 

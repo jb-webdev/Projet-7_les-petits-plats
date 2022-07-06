@@ -104,6 +104,7 @@
     max-height: 500px;
 }
 .item {
+    display: none;
     font-size: 18px;
     color: #ffffff;
     padding: 5px 8px;
@@ -117,7 +118,6 @@
     color: black;
     background-color: #f1f1f1
 }
-
 .item:focus {
     outline: none;
 }
@@ -132,7 +132,6 @@
 
 .btnInputIngredients {
     background: var(--color-Blue);
-    cursor: pointer;
 }
 
 .dropdown-contentInput-ingredients {
@@ -167,11 +166,6 @@
     background-color: var(--color-green);
 }
 
-.fa-angle-down,
-.fa-angle-up {
-    cursor: pointer;
-}
-
 .activeBox,
 .activeItem {
     display: -webkit-box;
@@ -183,4 +177,5 @@
 .openDropdownInput {
     width: 560px;
 }
+
 
