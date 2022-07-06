@@ -113,7 +113,6 @@ class Index {
 
 				var datasToFilter = []
 				var itemClass = ''
-				console.log(this.arrayItemRechercheIngredients[0])
 				switch (transformRecupIdInput.toLowerCase()) {
 					case 'ingredients' :
 						datasToFilter = this.arrayItemRechercheIngredients

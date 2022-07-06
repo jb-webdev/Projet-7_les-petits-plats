@@ -48,11 +48,12 @@ const researchTagUstensils = (dataDisplay, arrayRechercheTag) => {
         let filterTagElement = dataDisplay
         for (let elementTag of arrayRechercheTag) {
             filterTagElement = filterTagElement.filter(recipe => recipe.ustensils.some(
-                ustensils => ustensils.ustensil.toLowerCase().includes(elementTag)))
+                ustensil => ustensil.toLowerCase().includes(elementTag)))
         }
         // faire trois filtre un pour chaque bouttons
         return filterTagElement
     }
+      
 }
 
 
