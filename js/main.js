@@ -164,7 +164,7 @@ class Index {
 				break
 			}
 		  }, false);
-
+		
 		const itemsEvent = document.querySelectorAll('.item')
 		itemsEvent.forEach(el => el.addEventListener('click', el => {
 			var targetIdClose = el.target.classList[1]

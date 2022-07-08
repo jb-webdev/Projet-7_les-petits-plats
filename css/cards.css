@@ -15,16 +15,22 @@
     justify-content: space-evenly;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
+    row-gap: 30px;
+    column-gap: 20px;
 }
 
 .card {
-    margin: 10px;
     background-color: #fff;
     border-radius: 10px;
     -webkit-box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
     overflow: hidden;
     width: 350px;
+    transition: transform .2s
+}
+/*Annimation des cartes au survol de la souris*/
+.card:hover{
+    transform: scale(1.08)
 }
 
 .card-header .img {

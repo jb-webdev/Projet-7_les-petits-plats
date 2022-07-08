@@ -167,7 +167,7 @@ const createElementTag = (arrayTag, classTag) => {
         }
         const htmlContentTag = `
             <p class="textTag">${arrayTag[i]}</p>
-            <span class='closetag ${classTagElement}'><span id=close-${ModifyStringForDataValueElement} class="fa-solid fa-xmark"></span></span>
+            <span class='closetag${classTagElement}'><span id=close-${ModifyStringForDataValueElement} class="fa-solid fa-xmark"></span></span>
         `
         tagElement.innerHTML = htmlContentTag
         wrapperTag.appendChild(tagElement)
