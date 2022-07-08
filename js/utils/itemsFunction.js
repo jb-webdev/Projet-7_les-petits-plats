@@ -149,25 +149,33 @@ const createElementTag = (arrayTag, classTag) => {
     for (let i = 0; i < arrayTag.length; i++) {
         var tagElement = document.createElement('div')
         var classTagElement = ''
+        var closeTag = ''
         var ModifyStringForDataValueElement = accentsModifyDeleteSpace(arrayTag[i])
         tagElement.setAttribute('data-value', `${ModifyStringForDataValueElement}`)
+        
         switch (classTag) {
             case 'ingredients':
+                tagElement.setAttribute('id', `tagElementIngredients-${ModifyStringForDataValueElement}`)
                 tagElement.setAttribute('class', 'tagSelect tagSelect-ingredients')
                 classTagElement = ' closetagIngredients'
+                closeTag = 'closeTagIngredients'
                 break
             case 'appareils':
+                tagElement.setAttribute('id', `tagElementAppareils-${ModifyStringForDataValueElement}`)
                 tagElement.setAttribute('class', 'tagSelect tagSelect-appareils')
                 classTagElement = ' closetagAppareils'
+                closeTag = 'closeTagAppareils'
                 break
             case 'ustensils':
+                tagElement.setAttribute('id', `tagElementUstensils-${ModifyStringForDataValueElement}`)
                 tagElement.setAttribute('class', 'tagSelect tagSelect-ustensils')
                 classTagElement = ' closetagUstensils'
+                closeTag = 'closeTagUstensils'
                 break
         }
         const htmlContentTag = `
             <p class="textTag">${arrayTag[i]}</p>
-            <span class='closetag${classTagElement}'><span id=close-${ModifyStringForDataValueElement} class="fa-solid fa-xmark"></span></span>
+            <span class='closetag${classTagElement}'><span id=${closeTag}${ModifyStringForDataValueElement} class="fa-solid fa-xmark"></span></span>
         `
         tagElement.innerHTML = htmlContentTag
         wrapperTag.appendChild(tagElement)

@@ -168,18 +168,22 @@ class Index {
 		const itemsEvent = document.querySelectorAll('.item')
 		itemsEvent.forEach(el => el.addEventListener('click', el => {
 			var targetIdClose = el.target.classList[1]
+			var idTagActive = ''
 			switch (targetIdClose) {
 				case 'ingredients':
+					idTagActive = 'tagElementIngredients-'
 					this.arrayTagRechercheIngredient.push(el.target.textContent)
 					break
 				case 'appareils':
+					idTagActive = 'tagElementAppareils-'
 					this.arrayTagRechercheAppareils.push(el.target.textContent)
 					break
 				case 'ustensils':
+					idTagActive = 'tagElementUstensils-'
 					this.arrayTagRechercheUstensils.push(el.target.textContent)
 					break
 			}
-			var elements = document.querySelector(`div[data-value=${el.target.dataset.list}]`)
+			var elements = document.getElementById(`${idTagActive}${el.target.dataset.list}`)
 			elements.classList.toggle('activeTag')
 			closeBtn(targetIdClose[0].toUpperCase() + targetIdClose.slice(1))
 			this.displayReceips()
@@ -187,8 +191,20 @@ class Index {
 		// Event close tag
 		const closeTagEvent = document.querySelectorAll('.fa-xmark')
 		closeTagEvent.forEach(el => el.addEventListener('click', el => {
-			var changeId = el.target.id.replace('close-', '')
-			var elements = document.querySelector(`div[data-value=${changeId}]`)
+
+			var changeId
+			var idElementToClose = ''
+			if (el.target.id.includes('closeTagIngredients')){
+				changeId = el.target.id.replace('closeTagIngredients', '')
+				idElementToClose = 'tagElementIngredients-'
+			} else if (el.target.id.includes('closeTagAppareils')){
+				changeId = el.target.id.replace('closeTagAppareils', '')
+				idElementToClose = 'tagElementAppareils-'
+			} else if(el.target.id.includes('closeTagUstensils')){
+				idElementToClose = 'tagElementUstensils-'
+				changeId = el.target.id.replace('closeTagUstensils', '')
+			}
+			var elements = document.getElementById(`${idElementToClose}${changeId}`)
 			elements.classList.remove('activeTag')
 			switch (el.target.parentElement.classList[1]) {
 				case 'closetagIngredients':
