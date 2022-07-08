@@ -1,0 +1,106 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.14,
+* Autoprefixer: v10.4.7
+* Browsers: last 4 version
+*/
+
+:root {
+    --bg-primary: #e7e7e7;
+    --bg-secondary: #c7bebe;
+
+    --color-Blue: #3282f7;
+    --color-Blue-hover: #1168eb;
+    --color-green: #68d9a4;
+    --color-green-hover: #3abe80;
+    --color-red: #ed6454;
+    --color-red-hover: #eb3b27;
+    --color-white: #ffffff
+}
+
+body {
+    background-color: var(--color-white);
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    margin-top: 1em;
+}
+
+main {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    max-width: 85%;
+    margin-left: auto;
+    margin-right: auto;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.formReseach {
+    width: 100%;
+    height: 50px;
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin-bottom: 20px;
+}
+
+#inputResearch {
+    width: 100%;
+    height: 100%;
+    border: 3px solid var(--bg-secondary);
+    background: var(--bg-secondary);
+    border-right: none;
+    color: #ffffff;
+    font-size: 20px;
+    padding: 5px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+}
+
+.btnFormResearch {
+    /* width: 40px;
+   height: 36px;
+   */
+    width: 40px;
+    height: 64px;
+
+    border: 1px solid var(--bg-secondary);
+    background: var(--bg-secondary);
+    text-align: center;
+    color: #eeeeee;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 25px;
+}
+
+.btnFormResearch:hover {
+    background-color: #9d9898;
+}
+
+
+/* pour masquer les label*/
+.labelHidden {
+    height: 1px;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    top: -10000px;
+    width: 1px;
+}

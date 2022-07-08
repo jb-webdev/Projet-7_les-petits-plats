@@ -1,12 +1,82 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="#" />
+    <!-- Style CSS-->
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/button-tag.css">
+    <link rel="stylesheet" href="./css/tagItem.css">
+    <link rel="stylesheet" href="./css/cards.css">
     
+    <script src="https://kit.fontawesome.com/2b86093a15.js" crossorigin="anonymous"></script>
     <title>Petits-plats</title>
 </head>
 <body>
-    
-    
+    <header>
+        <img class="center" src="./asset/Screenshot-petits-plats_readme.png" alt="Logo du site">
+    </header>
+    <main>
+        <!-- Wrapper inputs-->
+        <form class="formReseach">
+            <label for="inputResearch" class="labelHidden">recherche une recette</label>
+            <input id='inputResearch' type="text" placeholder="Rechercher une recette">
+            <button class="btnFormResearch" disabled>
+                <span><span class="fa-solid fa-magnifying-glass"></span></span>
+            </button>
+
+        </form>
+        <!-- Wrapper tags-->
+        <div id="wrapperTag"></div>
+        <!-- Wrapper button dropdown-->
+        <div class="wrapperBtn">
+            <!-- Button Ingredient-->
+            <div class="dropdown ">
+                <div class="dropdownTag">
+                    <label for="researchTagIngredients" class="labelHidden" >rechercher un ingrédient</label>
+                    <input id="researchTagIngredients" class= "dropdownInput dropdownInputIngredients" type="text" placeholder="Ingredient">
+                    <button class="btnInput btnInputIngredients" type="button" tabindex="-1">
+                        <span id="arrowIngredients" class="fa-solid fa-angle-up"></span>
+                    </button>
+                </div>
+                <div id="wrapperInputIngredients" class="dropdown-contentInput dropdown-contentInput-ingredients">
+                    <ul id="wrapperInputIngredients-ul" class="ul-ingredients">
+                        <!-- <li class="item item-ingredient activeItem" data-value='chocolat'>chocolat</li> -->
+                    </ul>
+                </div>
+            </div>
+            <!-- Button Appareils-->
+            <div class="dropdown">
+                <div class="dropdownTag">
+                    <label for="researchTagAppareils" class="labelHidden">rechercher un Appareil</label>
+                    <input id="researchTagAppareils" class= "dropdownInput dropdownInputAppareils" type="text" placeholder="Appareils">
+                    <button class="btnInput btnInputAppareils" type="button" tabindex="-1">
+                        <span id="arrowAppareils" class="fa-solid fa-angle-up"></span>
+                    </button>
+                </div>
+                <div id="wrapperInputAppareils" class="dropdown-contentInput dropdown-contentInput-appareils">
+                    <ul id="wrapperInputAppareils-ul" class="ul-appareils"></ul>
+                </div>
+            </div>
+            <!-- Button ustensils-->
+            <div class="dropdown">
+                <div class="dropdownTag">
+                    <label for="researchTagUstensils" class="labelHidden">rechercher un ustensil</label>
+                    <input id="researchTagUstensils" class= "dropdownInput dropdownInputUstensils" type="text" placeholder="Ustensils">
+                    <button class="btnInput btnInputUstensils" type="button" tabindex="-1">
+                        <span id="arrowUstensils" class="fa-solid fa-angle-up"></span>
+                    </button>
+                </div>
+                <div id="wrapperInputUstensils" class="dropdown-contentInput dropdown-contentInput-ustensils">
+                    <ul id="wrapperInputUstensils-ul" class="ul-ustensils"></ul>
+                </div>
+            </div>
+        </div>
+        <!-- Wrapper cards-->
+        <div class="wrapperCards"></div>
+    </main>
     <script type="module" src="./js/main.js"></script>
 </body>
 </html>

@@ -1,0 +1,91 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.14,
+* Autoprefixer: v10.4.7
+* Browsers: last 4 version
+*/
+
+/* WRAPPER TAG */
+#wrapperTag {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.tagSelect {
+    display: none;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    width: auto;
+    height: 35px;
+    border-radius: 10px;
+
+    margin-bottom: 10px;
+}
+
+.closetag {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    width: 18px;
+    height: 18px;
+    font-size: 16px;
+    border-radius: 50%;
+    margin-left: 10px;
+    margin-right: 10px;
+
+}
+
+.fa-xmark {cursor: pointer;}
+
+.textTag {
+    margin-left: 10px;
+    color: #ffffff;
+}
+
+.tagSelect-ingredients,
+.tagSelect-appareils,
+.tagSelect-ustensils {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.tagSelect-ingredients {
+    background-color: var(--color-Blue);
+}
+
+.tagSelect-appareils {
+    background-color: var(--color-red);
+}
+
+.tagSelect-ustensils {
+    background-color: var(--color-green);
+}
+
+.activeTag {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
