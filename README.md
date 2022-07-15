@@ -26,7 +26,6 @@ _Projet 7 - les petits plats - Juin 2022_
 
 * ### frontend
   * HTML
-  * CSS 
-  * Bootstrap
+  * CSS
   * JavaScript
   
