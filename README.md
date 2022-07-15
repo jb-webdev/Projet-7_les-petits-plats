@@ -19,7 +19,7 @@ _Projet 7 - les petits plats - Juin 2022_
 
 * JsBench : `https://jsben.ch/`
 
-![Screenshot](./asset/Screenshot%202022-06-23%20at%2012-55-39%20JSBEN.CH.png)
+![Screenshot](./asset/Screenshot_2022-07-15_JSBEN.CH_Benchmarking%20for_JavaScript.png)
 
 
 ## Techno utilisés pour le projet  
