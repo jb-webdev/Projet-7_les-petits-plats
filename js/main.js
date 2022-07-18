@@ -48,10 +48,10 @@ class Index {
 		// on désactive l'affichage tous les items 
 		displayItemList(this.arrayItemRechercheIngredients, this.arrayItemRechercheAppareils, this.arrayItemRechercheUstensils, 'off')
 		// On lance les Algo de recherche
-		var datasDisplay = researchBar(this.arrayFilterRecherche, this.arrayBarRecherche)
-		var datasDisplay = researchTagIngredient(datasDisplay, this.arrayTagRechercheIngredient)
-		var datasDisplay = researchTagAppareils(datasDisplay, this.arrayTagRechercheAppareils)
-		var datasDisplay = researchTagUstensils(datasDisplay, this.arrayTagRechercheUstensils)
+		let  datasDisplay = researchBar(this.arrayFilterRecherche, this.arrayBarRecherche)
+		datasDisplay = researchTagIngredient(datasDisplay, this.arrayTagRechercheIngredient)
+		datasDisplay = researchTagAppareils(datasDisplay, this.arrayTagRechercheAppareils)
+		datasDisplay = researchTagUstensils(datasDisplay, this.arrayTagRechercheUstensils)
 		
 		// j'affiche le resultat de la recherche
 		if (datasDisplay.length === 0) {
