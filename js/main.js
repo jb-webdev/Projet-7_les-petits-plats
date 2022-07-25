@@ -154,9 +154,7 @@ class Index {
 				}
 			})
 		}))
-		inputEventIngredient.forEach(element => element.addEventListener('focusout', element =>{
-			this.closeAllBtn()
-		}))
+		
 		// ecouteur d'evenement btn recherche
 
 		document.addEventListener('keydown', (event) => {
