@@ -56,7 +56,6 @@ class Index {
 		// j'affiche le resultat de la recherche
 		if (datasDisplay.length === 0) {
 			this.containerRecipeCards.innerHTML = 'Aucune recette ne correspond à votre critère... Vous pouvez chercher  « tarte aux pommes », « poisson », etc.'
-
 		} else if (datasDisplay.length > 0) {
 			// on active les items à afficher
 			this.arrayItemRechercheIngredients = itemsBtnIngredient(datasDisplay)
@@ -73,7 +72,8 @@ class Index {
 						Factories.createRecipeCard()
 					)
 				})
-		}	
+		}
+
 	}
 
 	async main() {
@@ -154,9 +154,9 @@ class Index {
 				}
 			})
 		}))
-		inputEventIngredient.forEach(element => element.addEventListener('focusout', element =>{
-			this.closeAllBtn()
-		}))
+		//inputEventIngredient.forEach(element => element.addEventListener('focusout', element =>{
+			//this.closeAllBtn()
+		//}))
 		// ecouteur d'evenement btn recherche
 
 		document.addEventListener('keydown', (event) => {
